@@ -1,0 +1,1319 @@
+---
+format: 
+  revealjs: 
+    math: mathjax 
+    theme: simple  # Themes include 'simple', 'black', 'white', 'league', etc
+    slide-number: true
+    transition: convex  # Options include 'fade', 'slide', 'convex', etc.
+execute:
+  echo: false  # Hides code globally
+  freeze: auto # Automatically caches results
+---
+
+
+<!------------------------------ Slide 2 ---------------------------------->
+# <span style="font-size: 48px;color: #2F6050;">A Copula-based Approach for Modeling </span> <br> <span style="font-size: 34px;color: #2F6050;"> Dynamic and Group-wise Dependence Structures in Highly Volatile Markets</span> {background-color="#ECFADC"}
+<br> <br>
+<span style="font-size: 24px;color: black;">
+Author: Rui Liu <br>
+Supervisor: Pavel Krupskiy
+</span>
+
+<!------------------------------ Slide 3 ---------------------------------->
+# <span style="font-size: 70px;color: black;">Agenda</span> {background-color="#ECFADC"}
+<br>
+
+<div style="display: flex; justify-content: center; align-items: center; height: 100%; text-align: left; font-size: 24px; color: #2F6050; background: none;">
+
+- &nbsp;&nbsp;&nbsp;&nbsp; Topic 1: <span style="padding-left: 60px;">Introduction</span> <br>
+- &nbsp;&nbsp;&nbsp;&nbsp; Topic 2: <span style="padding-left: 60px;">Brief Introduction to Copulas</span> <br>
+- &nbsp;&nbsp;&nbsp;&nbsp; Topic 3: <span style="padding-left: 60px;"></span>Model Construction and Results<br>
+- &nbsp;&nbsp;&nbsp;&nbsp; Topic 4: <span style="padding-left: 60px;">Computational Details</span>
+- &nbsp;&nbsp;&nbsp;&nbsp; Topic 5: <span style="padding-left: 60px;">Conclusion and Q&A</span>
+</div>
+
+
+<!------------------------------ Slide 4 ---------------------------------->
+# <span style="color: #B7A137;"> Topic 1: Introduction </span>{background-color="#FCF9ED"}
+
+<!------------------------------ Slide 5---------------------------------->
+## <span style=" font-size: 35px; color: #B7A137;"> Main Contributions </span>{background-color="#FCF9ED"}
+
+<div style="display: flex; justify-content: center; align-items: center; height: 70%; text-align: left; font-size: 18px; color: #2F6050; background: none; margin-left: 6em; margin-right: 6em; line-height: 2">
+
+- Extended the factor copula model by integrating a non-parametric, dynamic dependence structure
+- Developed a dynamic copula switching model to capture time-varying dependencies
+- Designed a one-factor copula model incorporating group structures
+- Developed the R package <code>DDCopula</code> for efficient and user-friendly implementation of these models
+</div>
+<div style="display: block; justify-content: center; align-items: center; text-align: left; font-size: 16px; color: black; background: none; margin-left: 6em; margin-right: 6em; line-height: 2">
+All replicable results, codes, and the R package are publicly available at the following link: <br> <br>
+[https://github.com/rruiliu1005/Copula-Based-Approach-for-Modeling-Dynamic-and-Group-Wise-Dependence-Structures](https://github.com/rruiliu1005/Copula-Based-Approach-for-Modeling-Dynamic-and-Group-Wise-Dependence-Structures)
+
+</div>
+<!------------------------------ Slide 6---------------------------------->
+
+## <span style=" font-size: 35px; color: #B7A137;"> Properties of Assets in Highly Volatile Markets</span>{background-color="#FCF9ED"}
+
+<div style="display: flex; text-align: left; font-size: 20px; color: black; background: none; margin-top: 6em">
+<span style="color: #B7A137;">Assets in highly volatile markets exhibit certain characteristics that make them **challenging** to model<br><br></span>
+- &nbsp;&nbsp;&nbsp;&nbsp; Volatility clustering <br><br>
+- &nbsp;&nbsp;&nbsp;&nbsp; Aperiodic cyclical patterns of volatility <br><br>
+- &nbsp;&nbsp;&nbsp;&nbsp; Nonlinear dependence structure<br><br>
+- &nbsp;&nbsp;&nbsp;&nbsp; Asymmetric tail dependence</span><br><br>
+- &nbsp;&nbsp;&nbsp;&nbsp; Non-Gaussianity</span><br>
+</div>
+
+<div style="display: block;text-align: left; font-size: 16px; color: black; background: none; margin-top: 3em;">
+To demonstrate these characteristics and evaluate the performance of our model, we selected 20 cryptoassets for analysis 
+<div style="font-size: 12px; color: black; line-height: 1.0; margin-top: 2em; text-align: center;">
+  <table style="margin: 0 auto; border-collapse: collapse;">
+    <tr>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">Date</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">Assets</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">Unit</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">Frequency</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">Source</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">23 Oct 2020 - 02 Sep 2024</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">Bitcoin
+(BTC), &nbsp;  Ethereum (ETH), &nbsp; &nbsp; Ripple (XRP), &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cardano (ADA), &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Binance Coin (BNB) <br> 
+Litecoin (LTC), &nbsp;ChainLink (LINK), &nbsp;Ethereum Classic (ETC), Dogecoin (DOGE), Bitcoin
+Cash (BCH) <br> 
+EOS (EOS), &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solana (SOL), &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Polkadot (DOT), &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cosmos (ATOM), &nbsp;&nbsp;&nbsp;Avalanche
+(AVAX), <br> Tron (TRX), &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Polygon (MATIC), &nbsp;&nbsp;Fantom (FTM), &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Filcoin (FIL), &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Near(NEAR).</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">USDT denominated</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">Daily returns</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">Binance</td>
+    </tr>
+  </table>
+</div>
+</div>
+
+<!------------------------------ Slide 6---------------------------------->
+## <span style=" font-size: 35px; color: #B7A137;"> Properties of Assets in Highly Volatile Markets (Cont'd)</span>{background-color="#FCF9ED"}
+
+<span style="font-size: 25px; color: #B7A137;"> **Volatility clustering, aperiodic cyclical patterns of volatility** </span>
+
+<span style="font-size: 15px; color: #B7A137;"> Daily Returns Plot </span>
+![](daily_returns_plot.jpeg){ width=100% style="display: block; margin: auto;" }
+
+<!------------------------------ Slide 5
+## <span style=" font-size: 35px; color: white;"> Properties of Assets in Highly Volatile Markets</span>{background-color="#FCF9ED"}
+<span style="font-size: 25px; color: #B7A137;"> **Nonlinear and Asymmetric Dependence Structure** </span>
+
+<span style="font-size: 15px; color: #B7A137;"> Pairwise plot </span>
+
+![](pairwise_plot.jpeg){ width=50% style="display: block; margin: auto;" }
+ ---------------------------------->
+<!------------------------------ Slide 6 ---------------------------------->
+## <span style=" font-size: 35px; color: #B7A137;"> Properties of Assets in Highly Volatile Markets (Cont'd)</span>{background-color="#FCF9ED"}
+
+<span style="font-size: 25px; color: #B7A137;"> **Nonlinear and Asymmetric Dependence Structure** </span>
+
+::: {.columns}
+::: {.column width="50%"}
+<span style="font-size: 15px; color: #B7A137;"> **Normal Score Plot - Cryptocurrency Data** </span>
+![](data_normal_plots.png){ width=100% style="display: block; margin: auto;" }
+:::
+::: {.column width="50%"}
+<span style="font-size: 15px; color: #B7A137;"> **Normal Score Plot - Simulated Data**</span>
+![](simulated_normal_plots){ width=100% style="display: block; margin: auto;" }
+<br>
+<span style="font-size: 14px; color: #B7A137; line-height: 1.0; display: inline-block; margin: 0;">
+To simulate from the Gaussian distribution using the copula parameter $\rho_c$, we first calculate Spearman's rho $\rho_s$ from the data and then transform it using the following relationship:
+$$ \rho_c = 2 \times sin(\frac{\pi}{6 \rho_s})$$
+</span>
+:::
+:::
+
+<!------------------------------ Slide 7 ---------------------------------->
+
+<!------------------------------ Slide 7 ---------------------------------->
+# <span style="color: #2F6050;"> Topic 2: Brief Introduction to Copulas </span>{background-color="#ECFADC"}
+
+<!------------------------------ Slide 8 ------------------------------
+## <span style="color: #2F6050;"> Sklar's Thereom </span>{background-color="#ECFADC"}
+
+<span style="font-size: 16px; color: black; line-height: 2.0; display: block; margin-top: 10em;">
+Sklar's Theorem states that any multivariate cumulative distribution function 
+</span>
+
+<span style="font-size: 16px; color: #2F6050; line-height: 2.0; display: block; margin: 0em;">
+$$H(x_1,...,x_d)$$ 
+</span>
+
+<span style="font-size: 16px; color: black; line-height: 2.0; display: block; margin-top: 2em;">
+can be represented by a copula $C$ and its marginal distributions:
+</span>
+
+<span style="font-size: 16px; color: #2F6050; line-height: 2.0; display: block; margin: 0em;">
+$$H(x_1,...,x_d) = C(F_1(x_1),...,F_d(x_d))$$
+</span>
+<span style="font-size: 16px; color: black; line-height: 2.0; display: block; margin-bottom: 1em;">
+where C is the CDF of the copula. 
+---->
+<!------------------------------ Slide 9 ---------------------------------->
+## <span style="color: #2F6050;"> Copulas </span>{background-color="#ECFADC"}
+<span style="font-size: 20px; color: #2F6050; line-height: 1.0; display: block; text-align: right; margin: 0;">
+"A function which joins or 'couples' multivariate distribution function to its one-dimensional marginal distribution functions." - Roger Nelson 
+</span>
+
+</span>
+<span style="font-size: 16px; color: black; line-height: 2.0; display: block; margin-top: 3em;">
+Let
+$F \in \mathfrak{F}(F_1, ..., F_d)$
+be a d-multivariate distribution, and $F_j$ be the $j$th univariate margin for $j = 1,...,d$. <br>
+</span>
+
+<span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+The copula associated with $F$ is a distribution function $C:[0,1]^d \rightarrow [0,1]$ such that: 
+</span>
+
+<span style="font-size: 16px; color: #2F6050; line-height: 2.0; display: block; margin: 0;">
+$$F(x) =  C(F_1(x_1), ..., F_d(x_d))  =  C(u_1,..., u_d))  \qquad \text{where} \qquad x\in \mathbb{R}^d \qquad$$ 
+</span>
+<span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+Let 
+</span>
+<span style="font-size: 16px; color: #2F6050; line-height: 2.0; display: block; margin: 0;">
+$$X_1,...,X_d \sim F_1,...,F_d$$
+</span>
+<span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 0em;">
+then 
+<span style="font-size: 16px; color: #2F6050; line-height: 2.0; display: block; margin: 0;">
+$$\qquad F_j(X_j) \quad = \quad U_j \qquad \text{are uniformly distributed} \qquad \text{for} \quad j = 1,...,d \quad $$ 
+</span>
+<span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 0em;">
+and 
+</span>
+<span style="font-size: 16px; color: #2F6050; line-height: 2.0; display: block; margin: 0;">
+$$U_1,...,U_d \sim C$$
+</span>
+<span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 0em;">
+Moreover, if $F$ is a continuous $d$-variate distribution function with univariate margins $F_1,...,F_d$, and quantile functions $F^{-1}_1,...,F^{-1}_d$, then 
+</span>
+<span style="font-size: 16px; color: #2F6050; line-height: 2.0; display: block; margin: 0;">
+$$C(u) \quad = \quad F(F^{-1}_1(u_1),...,F^{-1}_d(u_d)), \qquad u\in [0,1]^d$$</span> 
+<span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 0em;">
+is the unique copula of $F$. 
+</span>
+
+<!------------------------------ Slide 10 ---------------------------------->
+## <span style=" font-size: 50px; color: #2F6050;">Common Copulas</span>{background-color="#ECFADC"}
+<span style=" font-size: 16px; color: #2F6050;">Copula contour with Kendall's $\tau = 0.7$</span>
+
+::: {.columns}
+::: {.column width="25%"}
+<span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 0em;">
+Gaussian Copula
+</span>
+<span style="font-size: 12px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+The multivariate Gaussian copula cdf is: 
+</span>
+<span style="font-size: 10px; color: #2F6050; line-height: 2.0; display: block; margin-top: 1em;">
+$$C_{\Sigma}(u,\Sigma) \quad = \quad \Phi_d(\Phi^{-1}(u_1),...\Phi^{-1}(u_d); \Sigma)$$ 
+<span style="font-size: 10px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+where 
+</span>
+
+<span style="font-size: 10px; color: black; line-height: 2.0; display: block; margin-top: 1em;">
+ - $\Phi_d(\cdot)$ is the multivariate Gaussian distribution CDF <br>
+</span>
+:::
+::: {.column width="25%"}
+![](gaussian_copula_contour.png){ width=50% style="display: block; margin: auto;" }
+:::
+::: {.column width="25%"}
+<span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 0em;">
+t-Copula
+</span>
+<span style="font-size: 12px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+The multivariate t-copula cdf is: 
+</span>
+<span style="font-size: 10px; color: #2F6050; line-height: 2.0; display: block; margin-top: 1em;">
+$$C_{\nu, \Sigma}(u_1,...,u_d) = T_{\nu,\Sigma}(T^{-1}_\nu(u_1),...T^{-1}_\nu(u_d))$$
+</span>
+<span style="font-size: 10px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+where 
+</span>
+<span style="font-size: 10px; color: black; line-height: 2.0; display: block; margin-top: 1em;">
+ - $T_{\nu,\Sigma}(\cdot)$ is the multivariate t-distribution CDF
+</span>
+:::
+::: {.column width="25%"}
+![](t_copula_contour.png){ width=50% style="display: block; margin: auto;" }
+:::
+:::
+::: {.columns}
+::: {.column width="25%"}
+<span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 0em;">
+Frank Copula
+</span>
+<span style="font-size: 12px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+The multivariate Frank copula cdf is: 
+</span>
+<span style="font-size: 10px; color: #2F6050; line-height: 2.0; display: block; margin-top: 1em;">
+$$C(u_1, u_2,...,u_d; \theta) = -\frac{1}{\theta}ln\left(1+\frac{\prod_{i=1}^d(1-e^{-\theta u_i})}{(e^{-\theta}-1)}\right)$$
+</span>
+<span style="font-size: 10px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+where 
+</span>
+<span style="font-size: 10px; color: black; line-height: 2.0; display: block; margin-top: 1em;">
+ - $\theta \in \mathbb{R}$ is the copula parameter which determines the strength and type of dependence
+</span>
+:::
+::: {.column width="25%"}
+![](frank_copula_contour.png){ width=50% style="display: block; margin: auto;" }
+:::
+::: {.column width="25%"}
+<span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 0em;">
+Gumbel Copula
+</span>
+<span style="font-size: 12px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+The multivariate Gumbel copula cdf is: 
+</span>
+<span style="font-size: 10px; color: #2F6050; line-height: 2.0; display: block; margin-top: 1em;">
+$$C_\theta(u_1, u_2, ..., u_d) \quad = \quad exp\left(-\left[\sum_{i=1}^d(-ln \; u_i)^\theta\right]^{1/\theta}\right)$$
+</span>
+<span style="font-size: 10px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+where 
+</span>
+<span style="font-size: 10px; color: black; line-height: 2.0; display: block; margin-top: 1em;">
+ - $\theta > 1$ is the dependence strength parameter 
+</span>
+:::
+::: {.column width="25%"}
+![](gumbel_copula_contour.png){ width=50% style="display: block; margin: auto;" }
+:::
+:::
+::: {.columns}
+::: {.column width="25%"}
+<span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 0em;">
+Reflected Gumbel Copula
+</span>
+<span style="font-size: 12px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+The multivariate Reflected Gumbel copula cdf is: 
+</span>
+<span style="font-size: 10px; color: #2F6050; line-height: 2.0; display: block; margin-top: 1em;">
+$$C_\theta(u_1, u_2, ..., u_d) \quad = \quad exp\left(-\left[\sum_{i=1}^d(-ln (1-u_i))^\theta\right]^{1/\theta}\right)$$
+</span>
+<span style="font-size: 10px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+where 
+</span>
+<span style="font-size: 10px; color: black; line-height: 2.0; display: block; margin-top: 1em;">
+ - $\theta$ is the dependence strength parameter $\theta > 1$
+</span>
+:::
+::: {.column width="25%"}
+![](rgumbel_copula_contour.png){ width=50% style="display: block; margin: auto;" }
+:::
+::: {.column width="25%"}
+<span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 0em;">
+Clayton Copula
+</span>
+<span style="font-size: 12px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+The multivariate Clayton copula cdf is: 
+</span>
+<span style="font-size: 10px; color: #2F6050; line-height: 2.0; display: block; margin-top: 1em;">
+$$C_\theta(u_1,...,u_d) \quad = \quad \left( \sum_{i=1}^{d}u_i^{-\theta} - d + 1 \right)^{-\frac{1}{\theta}}$$
+</span>
+<span style="font-size: 10px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+where 
+</span>
+<span style="font-size: 10px; color: black; line-height: 2.0; display: block; margin-top: 1em;">
+ - $\theta \geq 0$ is the copula parameter that controls the degree of dependence between the variables
+</span>
+:::
+::: {.column width="25%"}
+![](clayton_copula_contour.png){ width=50% style="display: block; margin: auto;" }
+:::
+:::
+
+## <span style="color: #2F6050; margin-bottom: 1em; display: block;"> Factor Copulas </span>{background-color="#ECFADC"}
+
+<span style="font-size: 16px; color: black; line-height: 2.0; display: block; margin-top: 2em;">
+In the copula model with $p$ factors, the transformed variables 
+<span style="font-size: 16px; color: #2F6050; line-height: 2.0; display: block; margin-top: 1em;">
+$$U_1,...,U_d = F_1(X_1),...,F_d(X_d)$$
+</span>
+<span style="font-size: 16px; color: black; line-height: 2.0; display: block; margin-top: 1em;">
+are regarded as independent conditional on $p$ latent variables $V_1,...,V_p$. Then we have: </span>
+<span style="font-size: 16px; color: #2F6050; line-height: 2.0; display: block; margin-top: 1em;">
+$$
+C(u_1,...u_d) = \underbrace{\int_...\int}_\text{p}\prod_{k=1}^{d}F_{k|V_1,...V_p}(u_k|v_1,...v_p)dv_1...dv_p
+$$
+</span>
+<span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+where $F_{k|V_1,...V_p}(u_k|v_1,...v_p)$ can be expressed as a function of bi-variate copulas, conditional distribution of \textbf{U} given latent variables \textbf{V}.
+</span>
+<br>
+
+::: {.columns}
+::: {.column width="50%"}
+![](one_factor_copula.png){ width=65% style="display: block; margin: auto;" }
+:::
+::: {.column width="50%"}
+![](two_factor_copula.png){ width=100% style="display: block; margin: auto;" }
+:::
+:::
+
+# <span style="color: #B7A137;"> Topic 3: Model Construction and Results </span>{background-color="#FCF9ED"}
+## <span style="color: #B7A137;"> Preliminary Steps</span>{background-color="#FCF9ED"}
+::: {.columns}
+::: {.column width="50%"}
+<span style="font-size: 20px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+ARMA-GARCH Filtering 
+</span>
+<span style="font-size: 12px; color: black; line-height: 1.5; display: block; margin-top: 2em;">
+$ARMA(p,q)$ <br>
+Let <br>
+- $y_t$ denote the time-series value at time $t$ <br>
+- $\epsilon_t$ denote the error term (white noise) at time $t$ where $E(\epsilon_t) = 0$ and $Var(\epsilon_t) = \sigma^2$ <br>
+Then:
+</span>
+<span style="font-size: 14px; color: #B7A137; line-height: 1.0; display: block; margin-top: 1em;">
+$$y_t = \mu + \phi_1y_{t-1} + \phi_2y_{t-2} + \cdots + \rho_p y_{t-p} + \epsilon_t$$
+</span>
+<span style="font-size: 12px; color: black; line-height: 1.5; display: block; 
+: 1em;">
+where <br> <br>
+- $p$ is the order of the AR component <br>
+- $q$ is the order of the MA component <br>
+- $\epsilon_t$ is the error term at time $t$, assumed to follow a white noise process with zero mean and constant variance
+</span>
+
+
+<span style="font-size: 12px; color: black; line-height: 1.5; display: block; margin-top: 2em;">
+$GARCH(p,q)$ <br>
+Let <br>
+- $\sigma_t$ denote error variance term at time $t$ <br>
+Then:
+</span>
+<span style="font-size: 14px; color: #B7A137; line-height: 1.0; display: block; margin-top: 1em;">
+$$\sigma^2_t = \alpha_0 + \alpha_1 y^2_{t-1} + ... + \alpha_p y^2_{t-p} + \beta_1 \sigma^2_{t-1} + ... + \beta_q \sigma^2_{t-q}$$
+</span>
+<span style="font-size: 12px; color: black; line-height: 1.5; display: block; margin-top: 1em;">
+where <br> <br>
+- $\alpha_{0} > 0$ and $\alpha_i \geq 0$ for $i = 1, \dots, p$ <br>
+- $\beta_0 > 0$ and $\beta_i \geq 0$ for $i = 1,....,q$ <br>
+</span>
+
+:::
+::: {.column width="50%"}
+<span style="font-size: 12px; color: black; line-height: 1.5; display: block; margin-top: 1em; display: block;">
+Ljung-Box Test: <br>
+$H_0$:There are no autocorrelations in the series <br>
+$H_1$: There are autocorrelations present in the series 
+</span>
+
+<div style="font-size: 10px; color: black; line-height: 0.6; margin-top: 1em; text-align: center;">
+  <table style="margin: 0 auto; border-collapse: collapse; width: 100%;">
+    <tr>
+      <th style="padding: 8px; border-bottom: 1px solid black; border-top: 1px solid black;">Asset</th>
+      <th style="padding: 8px; border-bottom: 1px solid black; border-top: 1px solid black;">ARMA-GARCH</th>
+      <th style="padding: 8px; border-bottom: 1px solid black; border-top: 1px solid black; font-weight: normal;">
+  <span style="font-weight: bold; line-height :1.5; ">P-Values</span> <br> Ljung-Box Test on Squared Residuals
+</th>
+    </tr>
+    <tr><td style="padding: 8px; ">ADAUSDT</td><td style="padding: 8px;">ARMA-GARCH(0,0,1,1)</td><td style="padding: 8px;">0.9877</td></tr>
+    <tr><td style="padding: 8px;">ATOMUSDT</td><td style="padding: 8px;">ARMA-GARCH(0,0,1,1)</td><td style="padding: 8px;">0.7997</td></tr>
+    <tr><td style="padding: 8px;">AVAXUSDT</td><td style="padding: 8px;">ARMA-GARCH(0,0,1,1)</td><td style="padding: 8px;">0.8036</td></tr>
+    <tr><td style="padding: 8px;">BCHUSDT</td><td style="padding: 8px;">ARMA-GARCH(0,0,1,3)</td><td style="padding: 8px;">0.9495</td></tr>
+    <tr><td style="padding: 8px;">BNBUSDT</td><td style="padding: 8px;">ARMA-GARCH(0,0,1,1)</td><td style="padding: 8px;">0.9493</td></tr>
+    <tr><td style="padding: 8px;">BTCUSDT</td><td style="padding: 8px;">ARMA-GARCH(0,0,1,3)</td><td style="padding: 8px;">0.9317</td></tr>
+    <tr><td style="padding: 8px;">DOGEUSDT</td><td style="padding: 8px;">ARMA-GARCH(1,2,2,0)</td><td style="padding: 8px;">0.9816</td></tr>
+    <tr><td style="padding: 8px;">DOTUSDT</td><td style="padding: 8px;">ARMA-GARCH(0,0,1,1)</td><td style="padding: 8px;">0.5122</td></tr>
+    <tr><td style="padding: 8px;">EOSUSDT</td><td style="padding: 8px;">ARMA-GARCH(0,0,2,3)</td><td style="padding: 8px;">0.8513</td></tr>
+    <tr><td style="padding: 8px;">ETCUSDT</td><td style="padding: 8px;">ARMA-GARCH(0,0,1,1)</td><td style="padding: 8px;">0.5238</td></tr>
+    <tr><td style="padding: 8px;">ETHUSDT</td><td style="padding: 8px;">ARMA-GARCH(0,0,1,1)</td><td style="padding: 8px;">0.9306</td></tr>
+    <tr><td style="padding: 8px;">FILUSDT</td><td style="padding: 8px;">ARMA-GARCH(0,0,1,1)</td><td style="padding: 8px;">0.9876</td></tr>
+    <tr><td style="padding: 8px;">FTMUSDT</td><td style="padding: 8px;">ARMA-GARCH(0,0,1,1)</td><td style="padding: 8px;">0.9235</td></tr>
+    <tr><td style="padding: 8px;">LINKUSDT</td><td style="padding: 8px;">ARMA-GARCH(0,0,1,1)</td><td style="padding: 8px;">0.2498</td></tr>
+    <tr><td style="padding: 8px;">LTCUSDT</td><td style="padding: 8px;">ARMA-GARCH(0,0,1,1)</td><td style="padding: 8px;">0.9130</td></tr>
+    <tr><td style="padding: 8px;">MATICUSDT</td><td style="padding: 8px;">ARMA-GARCH(0,0,1,1)</td><td style="padding: 8px;">0.1706</td></tr>
+    <tr><td style="padding: 8px;">NEARUSDT</td><td style="padding: 8px;">ARMA-GARCH(0,0,1,1)</td><td style="padding: 8px;">0.9279</td></tr>
+    <tr><td style="padding: 8px;">SOLUSDT</td><td style="padding: 8px;">ARMA-GARCH(0,0,1,1)</td><td style="padding: 8px;">0.5712</td></tr>
+    <tr><td style="padding: 8px;">TRXUSDT</td><td style="padding: 8px;">ARMA-GARCH(0,0,1,1)</td><td style="padding: 8px;">0.5337</td></tr>
+    <tr><td style="padding: 8px; border-bottom: 1px solid black;">XRPUSDT</td><td style="padding: 8px;border-bottom: 1px solid black;">ARMA-GARCH(2,2,1,2)</td><td style="padding: 8px;border-bottom: 1px solid black;">1.0000</td></tr>
+  </table>
+</div>
+
+
+:::
+:::
+
+## <span style="color: #B7A137;"> Preliminary Steps</span>{background-color="#FCF9ED"}
+
+<span style="font-size: 20px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+Fitting Marginal Distributions
+</span>
+
+::: {.columns}
+::: {.column width="25%"}
+<span style="font-size: 14px; color: #B7A137; line-height: 2.0; display: block; margin-top: 1em;">
+Fat tails and sharp peaks
+</span>
+</span>
+<div style="font-size: 10px; color: black; line-height: 1.0; margin-top: 5em; text-align: center;">
+  <table style="margin: 0 auto; border-collapse: collapse;">
+    <tr>
+      <th style="padding: 10px; border-top: 1px solid black;">Asset</th>
+      <th style="padding: 10px; border-top: 1px solid black;">Distribution</th>
+      <th style="padding: 10px; border-top: 1px solid black;">Asset</th>
+      <th style="padding: 10px; border-top: 1px solid black;">Distribution</th>
+    </tr>
+    <tr>
+      <td style="padding: 10px;">BCHUSDT</td>
+      <td style="padding: 10px;">laplace</td>
+      <td style="padding: 10px;">XRPUSDT</td>
+      <td style="padding: 10px;">laplace</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px;">BNBUSDT</td>
+      <td style="padding: 10px;">laplace</td>
+      <td style="padding: 10px;">ADAUSDT</td>
+      <td style="padding: 10px;">logistic</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px;">BTCUSDT</td>
+      <td style="padding: 10px;">laplace</td>
+      <td style="padding: 10px;">ATOMUSDT</td>
+      <td style="padding: 10px;">logistic</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px;">DOGEUSDT</td>
+      <td style="padding: 10px;">laplace</td>
+      <td style="padding: 10px;">AVAXUSDT</td>
+      <td style="padding: 10px;">logistic</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px;">EOSUSDT</td>
+      <td style="padding: 10px;">laplace</td>
+      <td style="padding: 10px;">DOTUSDT</td>
+      <td style="padding: 10px;">logistic</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px;">ETCUSDT</td>
+      <td style="padding: 10px;">laplace</td>
+      <td style="padding: 10px;">FTMUSDT</td>
+      <td style="padding: 10px;">logistic</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px;">ETHUSDT</td>
+      <td style="padding: 10px;">laplace</td>
+      <td style="padding: 10px;">LINKUSDT</td>
+      <td style="padding: 10px;">logistic</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px;">FILUSDT</td>
+      <td style="padding: 10px;">laplace</td>
+      <td style="padding: 10px;">MATICUSDT</td>
+      <td style="padding: 10px;">logistic</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px;">LTCUSDT</td>
+      <td style="padding: 10px;">laplace</td>
+      <td style="padding: 10px;">NEARUSDT</td>
+      <td style="padding: 10px;">logistic</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px;border-bottom: 1px solid black;"">TRXUSDT</td>
+      <td style="padding: 10px;border-bottom: 1px solid black;"">laplace</td>
+      <td style="padding: 10px;border-bottom: 1px solid black;"">SOLUSDT</td>
+      <td style="padding: 10px; border-bottom: 1px solid black;">logistic</td>
+    </tr>
+  </table>
+</div>
+
+:::
+::: {.column width="75%"}
+![](fitted_distributions.jpg){ width=70% style="display: block; margin: auto;" }
+:::
+:::
+## <span style="color: #B7A137; font-size: 50px"> Model 1 - Standard One Factor Copula Model</span>{background-color="#FCF9ED"}
+<span style="font-size: 20px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+Model Setup 
+</span>
+<span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+In a one factor copula, we assume our variables of interest 
+</span>
+<span style="font-size: 16px; color: #B7A137;; line-height: 1.0; display: block; margin-top: 1em;">
+$$X_{i1},...,X_{id} \in \mathbb{R} \qquad \text{ for } i = 1,...,n$$ 
+</span>
+<span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+have been transformed to uniform random variables using their respective univariate marginal distributions
+</span>
+<span style="font-size: 16px; color: #B7A137;; line-height: 1.0; display: block; margin-top: 1em;">
+$$U_{i1},...,U_{id} \sim Uniform(0,1) \qquad \text{ for } i = 1,...,n $$
+</span>
+<span style="font-size: 16px; color: black; line-height: 1.5; display: block; margin-top: 1em;">
+We further assume that $U_{i1},...,U_{id}$ are conditionally independent given the latent variable $V_1$, and we assume $V_1 \sim Uniform(0,1)$ <br>
+Then, let $F_{U_j|V_1}$ denote the conditional cumulative distribution function of $U_j$ given $V_1$, we have: 
+</span>
+<span style="font-size: 16px; color: #B7A137;; line-height: 1.0; display: block; margin-top: 1em;">
+$$
+    F_{X_1,...,X_d}(x_{i1},...,x_{id}) = C(u_{i1},...,u_{id}) = \int_0^1 \prod_{j=1}^{d}F_{U_j|V_1}(u_{ij}|v_{1})dv_1  = \int_0^1 \prod_{j=1}^{d}C_{U_j|V_1}(u_{ij}|v_{1})dv_1
+$$
+</span>
+
+<span style="font-size: 16px; color: black; line-height: 1.5; display: block; margin-top: 1em;">
+Since $U_j$ and $V_1$ are $Uniform(0,1)$ random variables, and 
+</span>
+<span style="font-size: 16px; color: #B7A137;; line-height: 1.0; display: block; margin-top: 1em;">
+$$F_{U_j|V_1} (u_{ij}|v_{1}) = \frac{\partial }{\partial V_1}C_{U_j,V_1}(u_j,v_1) = C_{U_j|V_1}(u_j|v_1)$$ 
+</span>
+<span style="font-size: 16px; color: black; line-height: 1.5; display: block; margin-top: 1em;">
+Therefore,  
+</span>
+<span style="font-size: 16px; color: #B7A137;; line-height: 1.0; display: block; margin-top: 1em;">
+$$c(u_{i1},...,u_{id}) = \frac{\partial^d}{\partial u_{i1},...,u_{id}}C(u_{i1},...,u_{id}) = \int_0^1\prod_{j=1}^d c_{U_j, V_1}(u_{ij},v_{1})dv_1$$
+</span>
+<span style="font-size: 16px; color: black; line-height: 1.5; display: block; margin-top: 1em;">
+since 
+</span>
+<span style="font-size: 16px; color: #B7A137;; line-height: 1.0; display: block; margin-top: 1em;">
+$$\frac{\partial}{\partial u_{ij}}C_{U_j|V_1}(u_{ij}|v_{1}) = \frac{\partial^2}{\partial U_j \partial V_1} C_{U_j, V_1}(u_{ij},v_{1}) = c_{U_j, V_1}(u_{ij},v_{1})$$
+</span>
+
+## <span style="color: #B7A137; font-size: 55px;"> Model 1 - Standard One Factor Copula Model</span>{background-color="#FCF9ED"}
+<span style="font-size: 20px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+Model Results 
+</span>
+<span style="color: black; font-size: 14px;">
+The tail weighted measure of dependence is defined as: 
+</span>
+<span style="color: #B7A137; font-size: 14px;">
+\begin{equation} \label{eq:tail_weighted_measure_of_dependence}
+\rho_L(a,p) = Cor\left( a\left(1 - \frac{1-U_1}{p}\right), a\left(1 - \frac{1-U_2}{p}\right) \middle| U_1 < p, U_2 < p \right)
+\end{equation}
+$$\rho_U(a,p)= Cor\left ( a\left(1 - \frac{1-U_1}{p}\right), a\left(1  - \frac{1-U_2}{p}\right) \middle| 1-U_1 < p, 1- U_2 < p\right)$$
+</span>
+<span style="color: black; font-size: 14px; line-height :2; display:block;">
+where <br>
+    - $\rho_U$ and $\rho_L$ are the upper and lower tail-weighted dependence measures <br>
+    - $a(\cdot)$ : $[0,1]\rightarrow (0,\infty)$ is a continuous function <br>
+    - $p$ is the truncation level satisfying $0<p\leq 0.5$ <br>
+</span>
+
+::: {.columns} 
+::: {.column width="30%"}
+<span style="color: black; font-size: 14px; line-height :1.5; display:block;">
+We take $a$ to be the power function $a(u) = u^k$ and define squared errors for the tail-weighted measure of dependence as follows:
+</span>
+
+<span style="color: #B7A137; font-size: 14px;">
+$$
+\text{SE Upper Tail} = \sum_i^d\sum_j^d(\rho_{U; i,j}^{\text{simulated}} - \rho_{U; i,j}^{\text{observed}})^2 \\
+\text{SE Lower Tail} = \sum_i^d\sum_j^d(\rho_{L; i,j}^{\text{simulated}} - \rho_{L; i,j}^{\text{observed}})^2
+$$
+</span>
+
+:::
+::: {.column width="70%"}
+<div style="font-size: 12px; color: black; text-align: center; margin-top: 2em;">
+  <table style="margin: 0 auto; border-collapse: collapse; width: 80%;">
+    <!-- Apply top border only on the first row -->
+    <tr>
+      <th style="padding: 10px; border-top: 1px solid black; border-bottom: 1px solid black;">Copula</th>
+      <th style="padding: 10px; border-top: 1px solid black; border-bottom: 1px solid black;">AIC</th>
+      <th style="padding: 10px; border-top: 1px solid black; border-bottom: 1px solid black;">BIC</th>
+      <th style="padding: 10px; border-top: 1px solid black; border-bottom: 1px solid black;">Upper Tail Dependence Measure Squared Error</th>
+      <th style="padding: 10px; border-top: 1px solid black; border-bottom: 1px solid black;">Lower Tail Dependence Measure Squared Error</th>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border-bottom: 1px solid black;">Gaussian</td>
+      <td style="padding: 10px; border-bottom: 1px solid black;">-25278.32</td>
+      <td style="padding: 10px; border-bottom: 1px solid black;">-25173.28</td>
+      <td style="padding: 10px; border-bottom: 1px solid black; color: green;"><strong>2.57</strong></td>
+      <td style="padding: 10px; border-bottom: 1px solid black;">28.77</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border-bottom: 1px solid black;">Clayton</td>
+      <td style="padding: 10px; border-bottom: 1px solid black;">-26273.95</td>
+      <td style="padding: 10px; border-bottom: 1px solid black;">-26168.91</td>
+      <td style="padding: 10px; border-bottom: 1px solid black;">35.78</td>
+      <td style="padding: 10px; border-bottom: 1px solid black;">2.24</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border-bottom: 1px solid black;">Gumbel</td>
+      <td style="padding: 10px; border-bottom: 1px solid black;">-23113.67</td>
+      <td style="padding: 10px; border-bottom: 1px solid black;">-23008.63</td>
+      <td style="padding: 10px; border-bottom: 1px solid black;">27.41</td>
+      <td style="padding: 10px; border-bottom: 1px solid black;">94.46</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border-bottom: 1px solid black;">Reflected Gumbel</td>
+      <td style="padding: 10px; border-bottom: 1px solid black;">-28705.38</td>
+      <td style="padding: 10px; border-bottom: 1px solid black;">-28600.34</td>
+      <td style="padding: 10px; border-bottom: 1px solid black;">3.17</td>
+      <td style="padding: 10px; border-bottom: 1px solid black; color: green;"><strong>0.99</strong></td>
+    </tr>
+  </table>
+</div>
+:::
+:::
+
+
+
+
+## <span style="color: #B7A137; font-size: 55px;"> Model 2 - Dynamic Dependence Structure </span>{background-color="#FCF9ED"}
+<span style="font-size: 20px; color: black; line-height: 2.0; display: block; margin-top: 1em;">
+Model Setup 
+</span>
+<span style="font-size: 18px; color: black; line-height: 2; display: block; margin-top: 2em;">
+Non-parametric, dynamic modelling of the dependence parameters. <br> <br>
+Find the maximum likelihood estimators $\widehat{\theta}_{jTd_m}$ for $j = 1,..,p$ and $d_m \in {T,...,N}$
+</span>
+<span style="font-size: 18px; color: #B7A137; line-height: 2.0; display: block; margin-top: 1em;">
+$$L(\mathbf{u_1},...,\mathbf{u_d};  \theta_{1Td_m},..., \theta_{dTd_m}) = \prod_{i=d_m-T+1}^{d_m} \int_0^1\prod_{j=1}^d c_{U_j, V_1}(u_{ij},v_{1}; \theta_{jTd_m})dv_{1}$$
+</span>
+<span style="font-size: 18px; color: black; line-height: 2.5; display: block; margin-top: 1em;">
+T is the rolling-window size. <br>
+By minimizing the negative of the log likelihood below: 
+</span>
+<span style="font-size: 18px; color: #B7A137; line-height: 2.0; display: block; margin-top: 1em;">
+$$l(\mathbf{u_1},..,\mathbf{u_d}; \theta_{1Td_m},..., \theta_{dTd_m}) = \sum_{i=d_m-T+1}^{d_m} log\left(\int_0^1\prod_{j=1}^dc_{U_{j}, V_{1}}(u_{ij}, v_{1}; \theta_{jTd_m})dv_{1}\right)$$
+</span>
+
+## <span style="color: #B7A137; font-size: 55px;"> Model 2 - Dynamic Dependence Structure </span>{background-color="#FCF9ED"}
+<span style="font-size: 20px; color: black; line-height: 2.0; display: block; margin-top: 1em;">
+Model Results 
+</span>
+
+::: {.columns} 
+::: {.column width="50%"}
+![](dynamic_dependence_gaussian_90.jpg){ width=100% style="display: block; margin: auto;" }
+:::
+::: {.column width="50%"}
+![](dynamic_dependence_gumbel_90.jpg){ width=100% style="display: block; margin: auto;" }
+:::
+:::
+
+::: {.columns} 
+::: {.column width="50%"}
+![](dynamic_dependence_rgumbel_90.jpg){ width=100% style="display: block; margin: auto;" }
+:::
+::: {.column width="50%"}
+![](dynamic_dependence_clayton_90.jpg){ width=100% style="display: block; margin: auto;" }
+:::
+:::
+
+::: {.columns} 
+::: {.column width="100%"}
+<div style="font-size: 11px; color: black; text-align: center; margin-top: 1em;">
+  <table style="margin: 0 auto; border-collapse: collapse; width: 100%;">
+    <tr>
+      <th style="padding: 6px; border-bottom: 1px solid black; border-top: 1px solid black;">Metric</th>
+      <th style="padding: 6px; border-bottom: 1px solid black; border-top: 1px solid black;">Gaussian</th>
+      <th style="padding: 6px; border-bottom: 1px solid black; border-top: 1px solid black;">Clayton</th>
+      <th style="padding: 6px; border-bottom: 1px solid black; border-top: 1px solid black;">Gumbel</th>
+      <th style="padding: 6px; border-bottom: 1px solid black; border-top: 1px solid black;">Reflected Gumbel</th>
+    </tr>
+      <td style="padding: 6px; border-bottom: 1px solid black;">BIC (90 days)</td>
+      <td style="padding: 6px; border-bottom: 1px solid black;">-1770.87</td>
+      <td style="padding: 6px; border-bottom: 1px solid black;">-1725.43</td>
+      <td style="padding: 6px; border-bottom: 1px solid black;">-1611.80</td>
+      <td style="padding: 6px; border-bottom: 1px solid black; color:green;">-1916.57</td>
+    </tr>
+    <tr>
+      <td style="padding: 6px; border-bottom: 1px solid black;">BIC (180 days)</td>
+      <td style="padding: 6px; border-bottom: 1px solid black;">-3517.76</td>
+      <td style="padding: 6px; border-bottom: 1px solid black;">-3499.95</td>
+      <td style="padding: 6px; border-bottom: 1px solid black;">-3209.71</td>
+      <td style="padding: 6px; border-bottom: 1px solid black;color:green;">-3863.24</td>
+    </tr>
+    <tr>
+      <td style="padding: 6px; border-bottom: 1px solid black;">BIC (360 days)</td>
+      <td style="padding: 6px; border-bottom: 1px solid black;">-7146.74</td>
+      <td style="padding: 6px; border-bottom: 1px solid black;">-7176.75</td>
+      <td style="padding: 6px; border-bottom: 1px solid black;">-6578.48</td>
+      <td style="padding: 6px; border-bottom: 1px solid black;color:green;">-7905.84</td>
+    </tr>
+    <tr>
+      <td style="padding: 6px; border-bottom: 1px solid black;">BIC (720 days)</td>
+      <td style="padding: 6px; border-bottom: 1px solid black;">-14409.90</td>
+      <td style="padding: 6px; border-bottom: 1px solid black;">-14579.52</td>
+      <td style="padding: 6px; border-bottom: 1px solid black;">-13361.49</td>
+      <td style="padding: 6px; border-bottom: 1px solid black;color:green;">-13361.49</td>
+    </tr>
+  </table>
+</div>
+:::
+:::
+<!------------------------------------------ Slide 19 ------------------------------------------------>
+
+## <span style="color: #B7A137; font-size: 55px;"> Model 2 - Dynamic Dependence Structure </span>{background-color="#FCF9ED"}
+<span style="font-size: 20px; color: black; line-height: 2.0; display: block; margin-top: 1em;">
+Model Results 
+</span>
+
+::: {.columns} 
+::: {.column width="50%"}
+![](upper_dependence_error_90days.jpeg){ width=100% style="display: block; margin: auto;" }
+:::
+::: {.column width="50%"}
+![](lower_dependence_error_90days.jpeg){ width=100% style="display: block; margin: auto;" }
+
+:::
+:::
+
+::: {.columns} 
+::: {.column width="50%"}
+![](upper_dependence_error_180days.jpeg){ width=100% style="display: block; margin: auto;" }
+:::
+::: {.column width="50%"}
+![](lower_dependence_error_180days.jpeg){ width=100% style="display: block; margin: auto;" }
+
+:::
+:::
+
+<!------------------------------------------ Slide 20 ------------------------------------------------>
+## <span style="color: #B7A137; font-size: 40px;"> Model 3 - Copula Switching with Dynamic Dependence Structure</span>{background-color="#FCF9ED"}
+<span style="font-size: 20px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+Model Setup and Results <br>
+</span>
+
+<span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+In this setting, we dynamically choose the best fitting copula based on the **total squared errors** of the **tail weighted dependence measures**. 
+</span>
+
+::: {.columns} 
+::: {.column width="50%"}
+![](copula_switching_90_days_tau_MATIC.jpeg){ width=100% style="display: block; margin-top: 1em;" }
+<span style="color: #B7A137; font-size: 12px; margin-top: 0em; margin_bottom: 0em;"> Gaussian: 15.67%  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Gumbel: 0.38% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Reflected Gumbel 72.45% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Clayton: 11.51%</span>
+:::
+::: {.column width="50%"}
+![](copula_switching_180_days_tau_MATIC.jpeg){ width=100% style="display: block; margin-top: 1em;" }
+<span style="color: #B7A137; font-size: 12px; margin-top: 0em;"> Gaussian: 5.28%  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Gumbel: 0% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Reflected Gumbel 91.96% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Clayton: 2.76%</span>
+:::
+:::
+
+::: {.columns} 
+::: {.column width="50%"}
+![](copula_switching_360_days_tau_MATIC.jpeg){ width=100% style="display: block; margin: 0;" }
+<div style="font-size: 11px; color: black; text-align: center; margin-top: 0em;">
+<span style="color: #B7A137; font-size: 12px; margin-top: 0em;"> Gaussian: 0.95%  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Gumbel: 0% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Reflected Gumbel 98.67% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Clayton: 0.38%</span>
+</div>
+:::
+::: {.column width="50%"}
+![](copula_switching_720_days_tau_MATIC.jpeg){ width=100% style="display: block; margin: 0;" }
+<div style="font-size: 11px; color: black; text-align: center; margin-top: 0em;">
+<span style="color: #B7A137; font-size: 12px; margin-top: 0em;"> Gaussian: 0%  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Gumbel: 0% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Reflected Gumbel 100% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Clayton: 0%</span>
+</div>
+:::
+:::
+
+## <span style="color: #B7A137; font-size: 55px;"> Model 4 - Factor Copula Model with Group Structure</span>{background-color="#FCF9ED"}
+<span style="font-size: 20px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+Model Setup 
+</span>
+
+:::{.columns}
+::: {.column width="40%"}
+![](factor_copula_with_group_structure.png){ width=80% style="display: block; margin: auto;" }
+:::
+::: {.column width="60%"}
+<span style="font-size: 20px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+**Market Leaders and Institutional-Grade Assets**<br>
+</span>
+<span style="font-size: 12px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+- most established and high-profile cryptocurrencies, often referred to as "blue-chip" assets within the crypto space <br>
+- Favored by institutional investors, have the highest levels of liquidity <br>
+- Recognized for their dominance and pivotal role in the broader ecosystem <br>
+</span>
+<span style="font-size: 20px; color: black; line-height: 1.0; display: block; margin-top: 2.5em;">
+**Legacy and High-Liquidity Assets**
+</span>
+<span style="font-size: 12px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+- Established assets that have existed for several years and are widely recognized in the market <br>
+- Early adopters of blockchain technology, playing a prominent role in the space <br>
+- Frequently used for payments, trading, and as investment vehicles <br>
+</span>
+<span style="font-size: 20px; color: black; line-height: 1.0; display: block; margin-top: 3em;">
+**Emerging Smart Contract and DeFi Platforms**
+</span>
+
+<span style="font-size: 12px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+- Newer platforms that prioritize scalability, fast transactions <br> 
+- Innovative technology to support decentralized applications and DeFi ecosystems <br>
+- Offering more efficient and scalable solutions for developers 
+</span>
+
+
+<span style="font-size: 20px; color: black; line-height: 1.0; display: block; margin-top: 3em;">
+**Technologically Advanced and Developer-Focused Platforms**
+</span>
+<span style="font-size: 12px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+- Assets backed by platforms known for their advanced technological frameworks <br>
+- Scalability, interoperability, and smart contract capabilities
+</span>
+:::
+:::
+<!--------------------Slide 21 ---------------------------->
+## <span style="color: #B7A137; font-size: 55px;"> Model 4 - Factor Copula Model with Group Structure</span>{background-color="#FCF9ED"}
+<span style="font-size: 20px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+Model Results 
+</span>
+<span style="color: #B7A137; font-size: 16px;"> Estimated Reflected Gumbel Copula Parameters with Group Structure - Static Model</span>
+<div style="font-size: 12px; color: black; text-align: center; margin-top: 0.5em;">
+  <table style="margin: 0 auto; border-collapse: collapse; width: 100%;">
+    <!-- First Table Header -->
+    <tr style="border-top: 1px solid black;">
+    <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">Estimated Parameters</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">ADA</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">ATOM</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">AVAX</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">BCH</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">BNB</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">BTC</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">DOGE</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">DOT</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">EOS</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">ETC</th>
+    </tr>
+    <!-- First Row Without Group Structure -->
+    <tr>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">Without Group Structure</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">3.109</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">2.543</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">2.658</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">2.849</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">2.541</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">2.856</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">2.322</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">3.289</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">3.101</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">3.295</td>
+    </tr>
+    <!-- Second Row With Group Structure -->
+    <tr>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">With Group Structure</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green">3.188</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green">2.687</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green">2.798</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green">3.268</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green">2.547</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green">3.546</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green">2.325</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green">3.466</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green">3.428</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green">3.550</td>
+    </tr>
+    <!-- Second Table Header -->
+    <tr style="border-top: 1px solid black;">
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">Estimated Parameters</td>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">ETH</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">FIL</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">FTM</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">LINK</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">LTC</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">MATIC</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">NEAR</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">SOL</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">TRX</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">XRP</th>
+    </tr>
+    <!-- Third Row Without Group Structure -->
+    <tr>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">Without Group Structure</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">3.372</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">2.475</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">2.384</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">2.955</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">2.880</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">2.780</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">2.314</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">2.236</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">2.024</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">2.336</td>
+    </tr>
+    <!-- Fourth Row With Group Structure -->
+    <tr style="border-bottom: 1px solid black;">
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">With Group Structure</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green;">3.987</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">2.197</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green;">2.666</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">2.899</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green;">3.137</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green;">2.964</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green;">2.668</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green;">2.283</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">2.007</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green;">2.388</td>
+    </tr>
+  </table>
+</div>
+<span style="color: #B7A137; font-size: 16px;"> Average Tail Weighted Measure of Dependence Measure Squared
+Error with Group Structure - Dynamic Dependence Model</span>
+<div style="font-size: 12px; color: black; text-align: center; margin-top: 1em;">
+  <table style="margin: 0 auto; border-collapse: collapse; width: 100%;">
+    <!-- First Table Header -->
+    <tr style="border-top: 1px solid black;">
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">Total Squared Error</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">Upper Tail</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">Lower Tail</th>
+    </tr>
+    <tr style="border-top: 1px solid black;">
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">Simulated data without group structure</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">10.6352</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">6.4047</th>
+    </tr>
+    <tr style="border-top: 1px solid black;">
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">Total Squared Error</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green;">2.567</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green;">1.9000</th>
+    </tr>
+  </table>
+</div>
+<!------------------Slide 23-------------------------------->
+# <span style="color: #2F6050;"> Topic 4: Computational Details </span>{background-color="#ECFADC"}
+<!------------------Slide 24-------------------------------->
+## <span style="color: #2F6050; font-size: 55px;"> Computational Complexity of the One Factor Copula Model</span>{background-color="#ECFADC"}
+
+<span style="font-size: 14px; color: black; line-height: 1.0; display: block; margin-top: 2em;">
+The likelihood function for the **one factor copula model** with $n$ observations and $d$ variables is defined as: 
+</span>
+
+<span style="font-size: 14px; color: #2F6050; line-height: 2.0; display: block; margin-top: 2em;">
+$$L(\mathbf{u_1},...,\mathbf{u_d}; \theta_1,...\theta_d) = \prod_{i=1}^n \int_0^1\prod_{j=1}^d c_{U_j, V_1}(u_{ij},v_1; \theta_j)dv_{1}$$ 
+</span>
+<span style="font-size: 14px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+
+<span style="font-size: 14px; color: black; line-height: 1.0; display: block; margin-top: 2em;">Computing the likelihood for a factor copula model can be **computationally expensive**
+for several reasons <br>
+<ul style="margin-top: 0.5em; margin-left:3em; line-height: 2">
+  <li>For **each observation each variable**, we need to compute the values of all the bi-variate copula density</li>
+  <li>The product of the $d$ bivariate copula densities must be **integrated out with respect to the latent variable** using the Gauss-Legendre method <br> e.g. for each observation $i$ and $m$ number of quadrature points, we need to compute $m \times d$ number of bi-variate copula densities
+  <li> The likelihood function needs to be evaluated **multiple times** to find the optimal value</li>
+</ul>
+</span>
+e.g. with 2,000 observations, 20 variables and 35 quadrenture points, we need to compute 1.4 million bivariate copula densities; if the optimization algorithm converges in 100 iterations, the total number of calculations becomes 140 million 
+<span style="font-size: 14px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+Furthermore, the derivative of the log likelihood function with respect to a parameter $\theta_k$ can be derived as: 
+</span>
+<span style="font-size: 14px; color: #2F6050; line-height: 2.0; display: block; margin-top: 2em;">
+$$\frac{\partial}{\partial \theta_k}l(\mathbf{u_1},..,\mathbf{u_d}; \theta_1,..., \theta_d) = \sum_{i=1}^n \left\{\frac{\int_0^1\prod_{j\neq k}c_{U_j,V_{1}}(u_{ij}, v_{1}, \theta_j) \frac{\partial}{\partial \theta_k}c_{u_k, v_1}(u_{ik}, v_{1}; \theta_k)dv_{1}}{\int_0^1\prod_{j = 1}^d c_{U_j,V_{1}}
+(u_{ij}, v_{1}, \theta_j)}   \right\} $$
+</span>
+<span style="font-size: 14px; color: black; line-height: 2.0; display: block; margin-top: em;">
+For each iteration of the optimization process, we must compute $n \times d \times m$ bi-variate copula values and their corresponding derivatives for each model parameter, further compounding the computational cost. 
+</span>
+
+<!------------------Slide 25-------------------------------->
+## <span style="color: #2F6050; font-size: 55px;"> Optimization Strategies </span>{background-color="#ECFADC"}
+<span style="font-size: 18px; color: black; line-height: 2.5; display: block; margin-top: 5em;">
+<ul style="margin-top: 0.5em; margin-left:3em">
+  <li>**Use of Gauss-Legendre Method for Numerical Integration**</li>
+  <li>**Extensive Use of Matrix Operations with Efficient Packages**</li>
+  <li>**Efficient Product Calculation Using apply(), mapply() and do.call()**</li>
+  <li>**Mathematical Techniques**</li>
+  <li>**Efficient Handling of Gradients**</li>
+  <li>**Reuse of Intermediate Calculations**</li>
+  <li>**Use of Parallel Processing**</li>
+  <li>**Use of Rcpp for C++ Functions**</li>
+</ul>
+
+<!------------------Slide 26-------------------------------->
+## <span style="color: #2F6050; font-size: 55px;"> Optimization Strategies (Cont'd) </span>{background-color="#ECFADC"}
+<span style="font-size: 18px; color: black; line-height: 1.0; display: block; margin-top: 5em;">
+<ul style="margin-top: 0.5em; margin-left:3em">
+  <li>**Use of Gauss-Legendre Method for Numerical Integration**</li>
+  <ul style="margin-top: 0.2em; margin-left: 1em;">
+  <span style="font-size: 15px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+    <li>In the Gauss-Legendre method, the integral of a function $f(x)$ over the interval $[-1,1]$ with $\mathbf{m}$ **number of quadrature points** is approximated as: 
+</span>
+<span style="font-size: 18px; color: #2F6050; line-height: 2.0; display: block; margin-top: 1em;">
+$$\int_{-1}^{1}f(x)dx \approx \sum_{k=1}^{m}w_kf(x_k)$$ 
+</span>
+  </ul>
+<span style="font-size: 18px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+  <li>**Extensive Use of Matrix Operations**</li>
+</span>
+  <ul style="margin-top: 0.2em; margin-left: 1em;">
+    <span style="font-size: 15px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+    <li> For example, to perform the numerical integration in both the likelihood and the derivative functions, we define a matrix $V \in \mathbb{R}^{d \times m}$ 
+</span>
+<span style="font-size: 14px; color: #2F6050; line-height: 2.0; display: block; margin-top: 1em;">
+    $$V = 
+    \begin{bmatrix}
+      v_{11} & v_{12} & \cdots & v_{1m} \\
+      v_{21} & v_{22} & \cdots & v_{2m} \\
+      \vdots & \vdots & \vdots & \vdots \\
+      v_{d1} & v_{d2} & \cdots & v_{dm}
+    \end{bmatrix}
+    $$
+     </span>
+    <span style="font-size: 14px; color: black; line-height: 2.0; display: block; margin-top: 1em;">
+    <ul style="margin-top: 0.2em; margin-left: 1em;">
+    
+    <li> Gauss-Legendre quadrature points are replicated across observations </li>
+    <li> Elliminate the need to recalculate these values for every loop iteration, leveraging vectorized computations </li>
+    <li> The integral is also recycled to calculate both the likelihood function value as well as the derivative </li>
+    </ul>
+  </li>
+  </ul>
+</ul> 
+
+## <span style="color: #2F6050; font-size: 45px;"> Optimization Strategies (Cont'd) </span>{background-color="#ECFADC"}
+<span style="font-size: 18px; color: black; line-height: 2.5; display: block; margin-top: 1em;">
+<ul style="margin-top: 0.2em; margin-left: 1em; margin-bottom:0em;">
+  <li>**Mathematical Techniques**</li>
+  <ul style="margin-top: 0.2em; margin-left: 1em; margin-top: 0em">
+    <span style="font-size: 14px; color: black; line-height: 2.0; display: block; margin-top: 0em;">
+    <li> **Gaussian One Factor Copula**: the $j \neq k$ term cancels<br>
+    </span>
+    <span style="font-size: 14px; color: #2F6050; line-height: 2.5; display: block; margin-top: 1em;">
+<ul style="margin-top: 0.5em; margin-left:3em">
+    $$
+    \frac{\partial}{\partial \rho_k}l(\mathbf{u_1},..,\mathbf{u_d}; \rho_1,..., \rho_d) = \sum_{i=1}^n \left\{\frac{\int_0^1\prod_{j=1}^dc_{U_j,V_{1}}(u_{ij}, v_{1}, \rho_j) \frac{\rho_k(1-\rho_k^2) + \Phi^{-1}(u_{ik})\Phi^{-1}(v_{1})(1+\rho_k^2) - \rho_k(\Phi^{-1}(u_{ik})^2 + \Phi^{-1}(v_{1})^2)}{(1-\rho_k^2)^2}dv_{1}}{\int_0^1\prod_{j=1}^dc_{U_k,V_{1}}(u_{ik}, v_{1}, \rho_k) dv_{1}}   \right\}
+    $$
+    </span>
+    </li>
+  </ul>
+  <span style="font-size: 12px; color: black; line-height: 2; display: block; margin-top: 1em;">
+  <li> **Gumbel and Clayton One Factor Copula** <br>
+  </span>
+  <span style="margin-left: 20px; line-height:2;">Problem: The $j \neq k$ term does not cancel</span><br>
+    <span style="margin-left: 20px; line-height:2;">Solution:</span> 
+  </span>
+
+<span style="font-size: 14px; color: #2F6050; line-height: 2.5; display: block; margin-top: 1em;">
+$$
+    A = 
+    \begin{bmatrix}
+        c_{U_1,V_{1}}(u_{i1}, v_{1}) & c_{U_2,V_{1}}(u_{i2}, v_{1}) & \cdots & c_{U_d,V_{1}}(u_{id}, v_{1}) \\ 
+        c_{U_1,V_{1}}(u_{i1}, v_{1}) & c_{U_2,V_{1}}(u_{i2}, v_{1}) & \cdots & c_{U_d,V_{1}}(u_{id}, v_{1}) \\ 
+        \vdots                       & \vdots                         & \vdots & \vdots                        \\
+        c_{U_1,V_{1}}(u_{i1}, v_{1}) & c_{U_2,V_{1}}(u_{i2}, v_{1}) & \cdots & c_{U_d,V_{1}}(u_{id}, v_{1})
+    \end{bmatrix}
+    \qquad
+    B = 
+    \begin{bmatrix}
+        c_{U_1,V_{1}}(u_{i1}, v_{1}) & c_{U_2,V_{1}}(u_{i2}, v_{1}) & \cdots & c_{U_d,V_{1}}(u_{id}, v_{1})
+    \end{bmatrix}
+$$
+<span style="font-size: 14px; color: black; line-height: 2.5; display: block; margin-top: 2em;">
+so that when we compute the column products of the matrix A, the matrix becomes: 
+</span>
+<span style="font-size: 14px; color: #2F6050; line-height: 2.5; display: block; margin-top: 1em;">
+\begin{align*}
+    A_{prod}= 
+    \begin{bmatrix}
+        \prod_{j=1}^dc_{U_k,V_{1}}(u_{ik}, v_{1}, \theta_k)  & \prod_{j=1}^dc_{U_k,V_{1}}(u_{ik}, v_{1}, \theta_k) & \cdots & \prod_{j=1}^dc_{U_k,V_{1}}(u_{ik}, v_{1}, \theta_k) \\ 
+    \end{bmatrix}
+\end{align*}
+</span>
+<span style="font-size: 14px; color: #2F6050; line-height: 2.5; display: block; margin-top: 1em;">
+Finally, dividing by the row vector B, we have: 
+</span>
+<span style="font-size: 14px; color: #2F6050; line-height: 2.5; display: block; margin-top: 1em;">
+\begin{align*}
+    \frac{A_{prod}}{B} = 
+    \begin{bmatrix}
+        \prod_{j \neq 1}c_{U_k,V_{1}}(u_{ik}, v_{1}, \theta_k)  & \prod_{j \neq 2}c_{U_k,V_{1}}(u_{ik}, v_{1}, \theta_k) & \cdots & \prod_{j \neq d}c_{U_k,V_{1}}(u_{ik}, v_{1}, \theta_k) \\ 
+    \end{bmatrix} \\
+    \\
+\end{align*}
+  </ul>
+</ul>
+</span>
+</li>
+
+<!-----------------------slide 28 ---------------------------------->
+## <span style="color: #2F6050; font-size: 55px;"> Performance Benchmarking </span>{background-color="#ECFADC"}
+
+::: {.columns}
+::: {.column width="35%"}
+<span style="color: #2F6050; font-size: 12px; margin-left:2em">**Hardware Specifications**</span>
+:::
+::: {.column width="65%"}
+<div style="font-size: 10px; color: black; line-height: 1.0; margin-top: 5em; align: left;">
+  <table style="margin: 0 auto; border-collapse: collapse;">
+    <tr>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">Chip</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">CPU</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">Number of Cores</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">Memory</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">Operating System</th>
+    </tr>
+    <tr>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">Apple M2</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">ARM64</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">8 (4 performance, 4 efficiency)</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">24 GB</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">macOS</td>
+    </tr>
+  </table>
+</div>
+:::
+:::
+
+::: {.columns}
+::: {.column width="35%"}
+<ul style="font-size: 12px; color: #2F6050; line-height: 2.5; margin-top: 2em; margin-left: 3em">
+  <li>For the static one-factor copula model, our package performs:
+    <ul>
+      <li>Gaussian: 8.5 times faster than the existing R package <code>FactorCopula</code></li>
+      <li>Gumbel: 30% faster</li>
+      <li>Reflected Gumbel: 30% faster</li>
+    </ul>
+  </li>
+</ul>
+:::
+::: {.column width="65%"}
+<span style="color: #2F6050; font-size: 12px; margin-top: 2em; display: block; margin-left: 5em"> Runtime Comparison - Static Model </span>
+<div style="font-size: 10px; color: black; line-height: 1.0; margin-top: 1em; text-align: center;">
+  <table style="margin: 0 auto; border-collapse: collapse;">
+    <tr>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">Copula</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">$\texttt{FactorCopula}$</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">$\texttt{DDCopula}$</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">$\texttt{FactorCopula}$ (Log Likelihood)</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">$\texttt{DDCopula}$ (Log Likelihood)</th>
+    </tr>
+    <tr>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">Gaussian</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">83.01s</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none; color:green;">9.89</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">12647.19</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">12659.16</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">Clayton</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">NA</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;color:green;">37.59</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">NA</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">13156.98</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">Gumbel</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">139.11</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;color:green;">98.59</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">11592.72</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">11576.84</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">Reflected Gumbel</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">131.85</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;color:green;">96.52</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">14346.27</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">14372.69</td>
+    </tr>
+  </table>
+</div>
+
+:::
+:::
+
+::: {.columns}
+::: {.column width="40%"}
+<ul style="font-size: 12px; color: #2F6050; line-height: 2.5; margin-top: 4em; margin-left: 3em">
+  <li>For the dynamic one-factor copula models, our package performs:
+    <ul>
+      <li>Gaussian: 34 - 55 times faster</li>
+      <li>Gumbel: 15 - 20 times faster</li>
+      <li>Reflected Gumbel: 15 - 21 times faster</li>
+    </ul>
+  </li>
+</ul>
+:::
+::: {.column width="60%"}
+<span style="color: #2F6050; font-size: 12px; margin-top: 0em; display: block;"> Runtime Comparison - Dynamic Dependence Model </span>
+<div style="font-size: 10px; color: black; line-height: 1.0; margin-top: 1em; text-align: left; margin-left: 0em;">
+  <table style="margin: 0 auto; border-collapse: collapse;">
+    <tr>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;"></th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">Period = 90 days</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">Period = 180 days</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">Period = 360 days</th>
+      <th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">Period = 720 days</th>
+    </tr>
+    <tr>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;"> $\texttt{DDCopula}$ (Gaussian)</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none; color: green;">2.34 mins</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none; color: green;">4.80 mins</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none; color: green;">9.12 mins</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none; color: green;">14.82 mins</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">$\texttt{FactorCopula}$ (Gausssian)</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">2.15 hours</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">3.88 hours</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">7.31 hours</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">8.55 hours</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">$\texttt{DDCopula}$ (Clayton)</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none; color: green;">13.44 mins</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none; color: green;">28.5 mins</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none; color: green;">23.58 mins</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none; color: green;">14.94 mins</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">$\texttt{FactorCopula}$ (Clayton)</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">NA</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">NA</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">NA</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">NA</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">$\texttt{DDCopula}$ (Gumbel)</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;color: green;">16.68 mins</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;color: green;">25.92 mins</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;color: green;">41.4 mins</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;color: green;">55.98 mins</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">$\texttt{FactorCopula}$ (Gumbel)</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">4.25 hours</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">8.58 hours</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">13.55 hours</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">18.41 hours</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">$\texttt{DDCopula}$ (Reflected Gumbel)</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none; color: green;">14.64 mins</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none; color: green;">24.48 mins</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none; color: green;">40.20 mins</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none; color: green;">58.20 mins</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">$\texttt{FactorCopula}$</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">3.16 hours</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">6.19 hours</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">14.00 hours</td>
+      <td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">14.52 hours</td>
+    </tr>
+  </table>
+</div>
+:::
+:::
+
+# <span style="color: white;"> Topic 5: Conlusion & Q&A </span>{background-color="#6DA616"}
+## <span style="color: white;"> Conlusions </span>{background-color="#6DA616"}
+
+<div style="display: block; justify-content: center; align-items: center; text-align: left; font-size: 18px; color: white; background: none; margin-top: 5em; line-height: 1.5">
+  <strong>Contribution:</strong> <br>
+  <ul>
+    <li>Extended the factor copula model by incorporating a non-parametric, dynamic dependence structure</li>
+    <li>Developed a dynamic copula switching model to capture time-varying dependencies</li>
+    <li>Designed a one-factor copula model with group structure capabilities</li>
+    <li>Created the R package <code>DDCopula</code> for efficient and user-friendly implementation of these models</li>
+  </ul>
+  <br>
+  <br>
+  <strong>Future Directions:</strong> <br>
+  <ul>
+    <li>Incorporating dynamic group structures</li>
+    <li>Enhancing the <code>DDCopula</code> R package</li>
+    <li>Exploring models with additional latent factors</li>
+    <li>Implementing regime-switching mechanisms</li>
+    <li>Developing more complex group structures</li>
+    <li>Investigating alternative methods for modeling dynamic copula parameters</li>
+  </ul>
+</div>
+
+## <span style="color: white;"> Q&A </span>{background-color="#6DA616"}
+

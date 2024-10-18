@@ -1,0 +1,2427 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="thesis_presentation_files/libs/clipboard/clipboard.min.js"></script>
+<script src="thesis_presentation_files/libs/quarto-html/tabby.min.js"></script>
+<script src="thesis_presentation_files/libs/quarto-html/popper.min.js"></script>
+<script src="thesis_presentation_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="thesis_presentation_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="thesis_presentation_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="thesis_presentation_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="thesis_presentation_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.4.553">
+
+  <title>thesis_presentation</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="thesis_presentation_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="thesis_presentation_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="thesis_presentation_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="thesis_presentation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="thesis_presentation_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="thesis_presentation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="thesis_presentation_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+
+<section class="slide level2">
+
+<!------------------------------ Slide 2 ---------------------------------->
+</section>
+<section id="a-copula-based-approach-for-modeling-dynamic-and-group-wise-dependence-structures-in-highly-volatile-markets" class="title-slide slide level1 center" data-background-color="#ECFADC">
+<h1><span style="font-size: 48px;color: #2F6050;">A Copula-based Approach for Modeling </span> <br> <span style="font-size: 34px;color: #2F6050;"> Dynamic and Group-wise Dependence Structures in Highly Volatile Markets</span></h1>
+<p><br> <br> <span style="font-size: 24px;color: black;"> Author: Rui Liu <br> Supervisor: Pavel Krupskiy </span></p>
+<!------------------------------ Slide 3 ---------------------------------->
+</section>
+
+<section id="agenda" class="title-slide slide level1 center" data-background-color="#ECFADC">
+<h1><span style="font-size: 70px;color: black;">Agenda</span></h1>
+<p><br></p>
+<div style="display: flex; justify-content: center; align-items: center; height: 100%; text-align: left; font-size: 24px; color: #2F6050; background: none;">
+<ul>
+<li>&nbsp;&nbsp;&nbsp;&nbsp; Topic 1: <span style="padding-left: 60px;">Introduction</span> <br></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp; Topic 2: <span style="padding-left: 60px;">Brief Introduction to Copulas</span> <br></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp; Topic 3: <span style="padding-left: 60px;"></span>Model Construction and Results<br></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp; Topic 4: <span style="padding-left: 60px;">Computational Details</span></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp; Topic 5: <span style="padding-left: 60px;">Conclusion and Q&amp;A</span></li>
+</ul>
+</div>
+<!------------------------------ Slide 4 ---------------------------------->
+</section>
+
+<section>
+<section id="topic-1-introduction" class="title-slide slide level1 center" data-background-color="#FCF9ED">
+<h1><span style="color: #B7A137;"> Topic 1: Introduction </span></h1>
+<!------------------------------ Slide 5---------------------------------->
+</section>
+<section id="main-contributions" class="slide level2" data-background-color="#FCF9ED">
+<h2><span style=" font-size: 35px; color: #B7A137;"> Main Contributions </span></h2>
+<div style="display: flex; justify-content: center; align-items: center; height: 70%; text-align: left; font-size: 18px; color: #2F6050; background: none; margin-left: 6em; margin-right: 6em; line-height: 2">
+<ul>
+<li>Extended the factor copula model by integrating a non-parametric, dynamic dependence structure</li>
+<li>Developed a dynamic copula switching model to capture time-varying dependencies</li>
+<li>Designed a one-factor copula model incorporating group structures</li>
+<li>Developed the R package <code>DDCopula</code> for efficient and user-friendly implementation of these models</li>
+</ul>
+</div>
+<div style="display: block; justify-content: center; align-items: center; text-align: left; font-size: 16px; color: black; background: none; margin-left: 6em; margin-right: 6em; line-height: 2">
+<p>All replicable results, codes, and the R package are publicly available at the following link: <br> <br> <a href="https://github.com/rruiliu1005/Copula-Based-Approach-for-Modeling-Dynamic-and-Group-Wise-Dependence-Structures">https://github.com/rruiliu1005/Copula-Based-Approach-for-Modeling-Dynamic-and-Group-Wise-Dependence-Structures</a></p>
+</div>
+<!------------------------------ Slide 6---------------------------------->
+</section>
+<section id="properties-of-assets-in-highly-volatile-markets" class="slide level2" data-background-color="#FCF9ED">
+<h2><span style=" font-size: 35px; color: #B7A137;"> Properties of Assets in Highly Volatile Markets</span></h2>
+<div style="display: flex; text-align: left; font-size: 20px; color: black; background: none; margin-top: 6em">
+<p><span style="color: #B7A137;">Assets in highly volatile markets exhibit certain characteristics that make them <strong>challenging</strong> to model<br><br></span> - &nbsp;&nbsp;&nbsp;&nbsp; Volatility clustering <br><br> - &nbsp;&nbsp;&nbsp;&nbsp; Aperiodic cyclical patterns of volatility <br><br> - &nbsp;&nbsp;&nbsp;&nbsp; Nonlinear dependence structure<br><br> - &nbsp;&nbsp;&nbsp;&nbsp; Asymmetric tail dependence<br><br> - &nbsp;&nbsp;&nbsp;&nbsp; Non-Gaussianity<br></p>
+</div>
+<div style="display: block;text-align: left; font-size: 16px; color: black; background: none; margin-top: 3em;">
+To demonstrate these characteristics and evaluate the performance of our model, we selected 20 cryptoassets for analysis
+<div style="font-size: 12px; color: black; line-height: 1.0; margin-top: 2em; text-align: center;">
+<table style="margin: 0 auto; border-collapse: collapse;">
+<tbody><tr>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+Date
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+Assets
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+Unit
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+Frequency
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+Source
+</td>
+</tr>
+<tr>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+23 Oct 2020 - 02 Sep 2024
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+Bitcoin (BTC), &nbsp; Ethereum (ETH), &nbsp; &nbsp; Ripple (XRP), &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cardano (ADA), &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Binance Coin (BNB) <br> Litecoin (LTC), &nbsp;ChainLink (LINK), &nbsp;Ethereum Classic (ETC), Dogecoin (DOGE), Bitcoin Cash (BCH) <br> EOS (EOS), &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solana (SOL), &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Polkadot (DOT), &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cosmos (ATOM), &nbsp;&nbsp;&nbsp;Avalanche (AVAX), <br> Tron (TRX), &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Polygon (MATIC), &nbsp;&nbsp;Fantom (FTM), &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Filcoin (FIL), &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Near(NEAR).
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+USDT denominated
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+Daily returns
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+Binance
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<!------------------------------ Slide 6---------------------------------->
+</section>
+<section id="properties-of-assets-in-highly-volatile-markets-contd" class="slide level2" data-background-color="#FCF9ED">
+<h2><span style=" font-size: 35px; color: #B7A137;"> Properties of Assets in Highly Volatile Markets (Cont’d)</span></h2>
+<p><span style="font-size: 25px; color: #B7A137;"> <strong>Volatility clustering, aperiodic cyclical patterns of volatility</strong> </span></p>
+<p><span style="font-size: 15px; color: #B7A137;"> Daily Returns Plot </span> <img data-src="daily_returns_plot.jpeg" style="display: block; margin: auto;;width:100.0%"></p>
+<!------------------------------ Slide 5
+## <span style=" font-size: 35px; color: white;"> Properties of Assets in Highly Volatile Markets</span>{background-color="#FCF9ED"}
+<span style="font-size: 25px; color: #B7A137;"> **Nonlinear and Asymmetric Dependence Structure** </span>
+
+<span style="font-size: 15px; color: #B7A137;"> Pairwise plot </span>
+
+![](pairwise_plot.jpeg){ width=50% style="display: block; margin: auto;" }
+ ---------------------------------->
+<!------------------------------ Slide 6 ---------------------------------->
+</section>
+<section id="properties-of-assets-in-highly-volatile-markets-contd-1" class="slide level2" data-background-color="#FCF9ED">
+<h2><span style=" font-size: 35px; color: #B7A137;"> Properties of Assets in Highly Volatile Markets (Cont’d)</span></h2>
+<p><span style="font-size: 25px; color: #B7A137;"> <strong>Nonlinear and Asymmetric Dependence Structure</strong> </span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span style="font-size: 15px; color: #B7A137;"> <strong>Normal Score Plot - Cryptocurrency Data</strong> </span> <img data-src="data_normal_plots.png" style="display: block; margin: auto;;width:100.0%"></p>
+</div><div class="column" style="width:50%;">
+<p><span style="font-size: 15px; color: #B7A137;"> <strong>Normal Score Plot - Simulated Data</strong></span> <img data-src="simulated_normal_plots.png" style="display: block; margin: auto;;width:100.0%"> <br> <span style="font-size: 14px; color: #B7A137; line-height: 1.0; display: inline-block; margin: 0;"> To simulate from the Gaussian distribution using the copula parameter <span class="math inline">\(\rho_c\)</span>, we first calculate Spearman’s rho <span class="math inline">\(\rho_s\)</span> from the data and then transform it using the following relationship: <span class="math display">\[ \rho_c = 2 \times sin(\frac{\pi}{6 \rho_s})\]</span> </span></p>
+</div>
+</div>
+<!------------------------------ Slide 7 ---------------------------------->
+<!------------------------------ Slide 7 ---------------------------------->
+</section></section>
+<section>
+<section id="topic-2-brief-introduction-to-copulas" class="title-slide slide level1 center" data-background-color="#ECFADC">
+<h1><span style="color: #2F6050;"> Topic 2: Brief Introduction to Copulas </span></h1>
+<!------------------------------ Slide 8 ------------------------------
+## <span style="color: #2F6050;"> Sklar's Thereom </span>{background-color="#ECFADC"}
+
+<span style="font-size: 16px; color: black; line-height: 2.0; display: block; margin-top: 10em;">
+Sklar's Theorem states that any multivariate cumulative distribution function 
+</span>
+
+<span style="font-size: 16px; color: #2F6050; line-height: 2.0; display: block; margin: 0em;">
+$$H(x_1,...,x_d)$$ 
+</span>
+
+<span style="font-size: 16px; color: black; line-height: 2.0; display: block; margin-top: 2em;">
+can be represented by a copula $C$ and its marginal distributions:
+</span>
+
+<span style="font-size: 16px; color: #2F6050; line-height: 2.0; display: block; margin: 0em;">
+$$H(x_1,...,x_d) = C(F_1(x_1),...,F_d(x_d))$$
+</span>
+<span style="font-size: 16px; color: black; line-height: 2.0; display: block; margin-bottom: 1em;">
+where C is the CDF of the copula. 
+---->
+<!------------------------------ Slide 9 ---------------------------------->
+</section>
+<section id="copulas" class="slide level2" data-background-color="#ECFADC">
+<h2><span style="color: #2F6050;"> Copulas </span></h2>
+<p><span style="font-size: 20px; color: #2F6050; line-height: 1.0; display: block; text-align: right; margin: 0;"> “A function which joins or ‘couples’ multivariate distribution function to its one-dimensional marginal distribution functions.” - Roger Nelson </span></p>
+<p> <span style="font-size: 16px; color: black; line-height: 2.0; display: block; margin-top: 3em;"> Let <span class="math inline">\(F \in \mathfrak{F}(F_1, ..., F_d)\)</span> be a d-multivariate distribution, and <span class="math inline">\(F_j\)</span> be the <span class="math inline">\(j\)</span>th univariate margin for <span class="math inline">\(j = 1,...,d\)</span>. <br> </span></p>
+<p><span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> The copula associated with <span class="math inline">\(F\)</span> is a distribution function <span class="math inline">\(C:[0,1]^d \rightarrow [0,1]\)</span> such that: </span></p>
+<p><span style="font-size: 16px; color: #2F6050; line-height: 2.0; display: block; margin: 0;"> <span class="math display">\[F(x) =  C(F_1(x_1), ..., F_d(x_d))  =  C(u_1,..., u_d))  \qquad \text{where} \qquad x\in \mathbb{R}^d \qquad\]</span> </span> <span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> Let </span> <span style="font-size: 16px; color: #2F6050; line-height: 2.0; display: block; margin: 0;"> <span class="math display">\[X_1,...,X_d \sim F_1,...,F_d\]</span> </span> <span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 0em;"> then <span style="font-size: 16px; color: #2F6050; line-height: 2.0; display: block; margin: 0;"> <span class="math display">\[\qquad F_j(X_j) \quad = \quad U_j \qquad \text{are uniformly distributed} \qquad \text{for} \quad j = 1,...,d \quad \]</span> </span> <span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 0em;"> and </span> <span style="font-size: 16px; color: #2F6050; line-height: 2.0; display: block; margin: 0;"> <span class="math display">\[U_1,...,U_d \sim C\]</span> </span> <span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 0em;"> Moreover, if <span class="math inline">\(F\)</span> is a continuous <span class="math inline">\(d\)</span>-variate distribution function with univariate margins <span class="math inline">\(F_1,...,F_d\)</span>, and quantile functions <span class="math inline">\(F^{-1}_1,...,F^{-1}_d\)</span>, then </span> <span style="font-size: 16px; color: #2F6050; line-height: 2.0; display: block; margin: 0;"> <span class="math display">\[C(u) \quad = \quad F(F^{-1}_1(u_1),...,F^{-1}_d(u_d)), \qquad u\in [0,1]^d\]</span></span> <span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 0em;"> is the unique copula of <span class="math inline">\(F\)</span>. </span></span></p>
+<!------------------------------ Slide 10 ---------------------------------->
+</section>
+<section id="common-copulas" class="slide level2" data-background-color="#ECFADC">
+<h2><span style=" font-size: 50px; color: #2F6050;">Common Copulas</span></h2>
+<p><span style=" font-size: 16px; color: #2F6050;">Copula contour with Kendall’s <span class="math inline">\(\tau = 0.7\)</span></span></p>
+<div class="columns">
+<div class="column" style="width:25%;">
+<p><span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 0em;"> Gaussian Copula </span> <span style="font-size: 12px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> The multivariate Gaussian copula cdf is: </span> <span style="font-size: 10px; color: #2F6050; line-height: 2.0; display: block; margin-top: 1em;"> <span class="math display">\[C_{\Sigma}(u,\Sigma) \quad = \quad \Phi_d(\Phi^{-1}(u_1),...\Phi^{-1}(u_d); \Sigma)\]</span> <span style="font-size: 10px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> where </span></span></p>
+<p><span style="font-size: 10px; color: black; line-height: 2.0; display: block; margin-top: 1em;"> - <span class="math inline">\(\Phi_d(\cdot)\)</span> is the multivariate Gaussian distribution CDF <br> </span></p>
+</div><div class="column" style="width:25%;">
+<p><img data-src="gaussian_copula_contour.png" style="display: block; margin: auto;;width:50.0%"></p>
+</div><div class="column" style="width:25%;">
+<p><span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 0em;"> t-Copula </span> <span style="font-size: 12px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> The multivariate t-copula cdf is: </span> <span style="font-size: 10px; color: #2F6050; line-height: 2.0; display: block; margin-top: 1em;"> <span class="math display">\[C_{\nu, \Sigma}(u_1,...,u_d) = T_{\nu,\Sigma}(T^{-1}_\nu(u_1),...T^{-1}_\nu(u_d))\]</span> </span> <span style="font-size: 10px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> where </span> <span style="font-size: 10px; color: black; line-height: 2.0; display: block; margin-top: 1em;"> - <span class="math inline">\(T_{\nu,\Sigma}(\cdot)\)</span> is the multivariate t-distribution CDF </span></p>
+</div><div class="column" style="width:25%;">
+<p><img data-src="t_copula_contour.png" style="display: block; margin: auto;;width:50.0%"></p>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:25%;">
+<p><span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 0em;"> Frank Copula </span> <span style="font-size: 12px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> The multivariate Frank copula cdf is: </span> <span style="font-size: 10px; color: #2F6050; line-height: 2.0; display: block; margin-top: 1em;"> <span class="math display">\[C(u_1, u_2,...,u_d; \theta) = -\frac{1}{\theta}ln\left(1+\frac{\prod_{i=1}^d(1-e^{-\theta u_i})}{(e^{-\theta}-1)}\right)\]</span> </span> <span style="font-size: 10px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> where </span> <span style="font-size: 10px; color: black; line-height: 2.0; display: block; margin-top: 1em;"> - <span class="math inline">\(\theta \in \mathbb{R}\)</span> is the copula parameter which determines the strength and type of dependence </span></p>
+</div><div class="column" style="width:25%;">
+<p><img data-src="frank_copula_contour.png" style="display: block; margin: auto;;width:50.0%"></p>
+</div><div class="column" style="width:25%;">
+<p><span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 0em;"> Gumbel Copula </span> <span style="font-size: 12px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> The multivariate Gumbel copula cdf is: </span> <span style="font-size: 10px; color: #2F6050; line-height: 2.0; display: block; margin-top: 1em;"> <span class="math display">\[C_\theta(u_1, u_2, ..., u_d) \quad = \quad exp\left(-\left[\sum_{i=1}^d(-ln \; u_i)^\theta\right]^{1/\theta}\right)\]</span> </span> <span style="font-size: 10px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> where </span> <span style="font-size: 10px; color: black; line-height: 2.0; display: block; margin-top: 1em;"> - <span class="math inline">\(\theta &gt; 1\)</span> is the dependence strength parameter </span></p>
+</div><div class="column" style="width:25%;">
+<p><img data-src="gumbel_copula_contour.png" style="display: block; margin: auto;;width:50.0%"></p>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:25%;">
+<p><span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 0em;"> Reflected Gumbel Copula </span> <span style="font-size: 12px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> The multivariate Reflected Gumbel copula cdf is: </span> <span style="font-size: 10px; color: #2F6050; line-height: 2.0; display: block; margin-top: 1em;"> <span class="math display">\[C_\theta(u_1, u_2, ..., u_d) \quad = \quad exp\left(-\left[\sum_{i=1}^d(-ln (1-u_i))^\theta\right]^{1/\theta}\right)\]</span> </span> <span style="font-size: 10px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> where </span> <span style="font-size: 10px; color: black; line-height: 2.0; display: block; margin-top: 1em;"> - <span class="math inline">\(\theta\)</span> is the dependence strength parameter <span class="math inline">\(\theta &gt; 1\)</span> </span></p>
+</div><div class="column" style="width:25%;">
+<p><img data-src="rgumbel_copula_contour.png" style="display: block; margin: auto;;width:50.0%"></p>
+</div><div class="column" style="width:25%;">
+<p><span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 0em;"> Clayton Copula </span> <span style="font-size: 12px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> The multivariate Clayton copula cdf is: </span> <span style="font-size: 10px; color: #2F6050; line-height: 2.0; display: block; margin-top: 1em;"> <span class="math display">\[C_\theta(u_1,...,u_d) \quad = \quad \left( \sum_{i=1}^{d}u_i^{-\theta} - d + 1 \right)^{-\frac{1}{\theta}}\]</span> </span> <span style="font-size: 10px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> where </span> <span style="font-size: 10px; color: black; line-height: 2.0; display: block; margin-top: 1em;"> - <span class="math inline">\(\theta \geq 0\)</span> is the copula parameter that controls the degree of dependence between the variables </span></p>
+</div><div class="column" style="width:25%;">
+<p><img data-src="clayton_copula_contour.png" style="display: block; margin: auto;;width:50.0%"></p>
+</div>
+</div>
+</section>
+<section id="factor-copulas" class="slide level2" data-background-color="#ECFADC">
+<h2><span style="color: #2F6050; margin-bottom: 1em; display: block;"> Factor Copulas </span></h2>
+<p><span style="font-size: 16px; color: black; line-height: 2.0; display: block; margin-top: 2em;"> In the copula model with <span class="math inline">\(p\)</span> factors, the transformed variables <span style="font-size: 16px; color: #2F6050; line-height: 2.0; display: block; margin-top: 1em;"> <span class="math display">\[U_1,...,U_d = F_1(X_1),...,F_d(X_d)\]</span> </span> <span style="font-size: 16px; color: black; line-height: 2.0; display: block; margin-top: 1em;"> are regarded as independent conditional on <span class="math inline">\(p\)</span> latent variables <span class="math inline">\(V_1,...,V_p\)</span>. Then we have: </span> <span style="font-size: 16px; color: #2F6050; line-height: 2.0; display: block; margin-top: 1em;"> <span class="math display">\[
+C(u_1,...u_d) = \underbrace{\int_...\int}_\text{p}\prod_{k=1}^{d}F_{k|V_1,...V_p}(u_k|v_1,...v_p)dv_1...dv_p
+\]</span> </span> <span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> where <span class="math inline">\(F_{k|V_1,...V_p}(u_k|v_1,...v_p)\)</span> can be expressed as a function of bi-variate copulas, conditional distribution of given latent variables . </span> <br></span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="one_factor_copula.png" style="display: block; margin: auto;;width:65.0%"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="two_factor_copula.png" style="display: block; margin: auto;;width:100.0%"></p>
+</div>
+</div>
+</section></section>
+<section>
+<section id="topic-3-model-construction-and-results" class="title-slide slide level1 center" data-background-color="#FCF9ED">
+<h1><span style="color: #B7A137;"> Topic 3: Model Construction and Results </span></h1>
+
+</section>
+<section id="preliminary-steps" class="slide level2" data-background-color="#FCF9ED">
+<h2><span style="color: #B7A137;"> Preliminary Steps</span></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span style="font-size: 20px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> ARMA-GARCH Filtering </span> <span style="font-size: 12px; color: black; line-height: 1.5; display: block; margin-top: 2em;"> <span class="math inline">\(ARMA(p,q)\)</span> <br> Let <br> - <span class="math inline">\(y_t\)</span> denote the time-series value at time <span class="math inline">\(t\)</span> <br> - <span class="math inline">\(\epsilon_t\)</span> denote the error term (white noise) at time <span class="math inline">\(t\)</span> where <span class="math inline">\(E(\epsilon_t) = 0\)</span> and <span class="math inline">\(Var(\epsilon_t) = \sigma^2\)</span> <br> Then: </span> <span style="font-size: 14px; color: #B7A137; line-height: 1.0; display: block; margin-top: 1em;"> <span class="math display">\[y_t = \mu + \phi_1y_{t-1} + \phi_2y_{t-2} + \cdots + \rho_p y_{t-p} + \epsilon_t\]</span> </span> <span style="font-size: 12px; color: black; line-height: 1.5; display: block; 
+: 1em;"> where <br> <br> - <span class="math inline">\(p\)</span> is the order of the AR component <br> - <span class="math inline">\(q\)</span> is the order of the MA component <br> - <span class="math inline">\(\epsilon_t\)</span> is the error term at time <span class="math inline">\(t\)</span>, assumed to follow a white noise process with zero mean and constant variance </span></p>
+<p><span style="font-size: 12px; color: black; line-height: 1.5; display: block; margin-top: 2em;"> <span class="math inline">\(GARCH(p,q)\)</span> <br> Let <br> - <span class="math inline">\(\sigma_t\)</span> denote error variance term at time <span class="math inline">\(t\)</span> <br> Then: </span> <span style="font-size: 14px; color: #B7A137; line-height: 1.0; display: block; margin-top: 1em;"> <span class="math display">\[\sigma^2_t = \alpha_0 + \alpha_1 y^2_{t-1} + ... + \alpha_p y^2_{t-p} + \beta_1 \sigma^2_{t-1} + ... + \beta_q \sigma^2_{t-q}\]</span> </span> <span style="font-size: 12px; color: black; line-height: 1.5; display: block; margin-top: 1em;"> where <br> <br> - <span class="math inline">\(\alpha_{0} &gt; 0\)</span> and <span class="math inline">\(\alpha_i \geq 0\)</span> for <span class="math inline">\(i = 1, \dots, p\)</span> <br> - <span class="math inline">\(\beta_0 &gt; 0\)</span> and <span class="math inline">\(\beta_i \geq 0\)</span> for <span class="math inline">\(i = 1,....,q\)</span> <br> </span></p>
+</div><div class="column" style="width:50%;">
+<p><span style="font-size: 12px; color: black; line-height: 1.5; display: block; margin-top: 1em; display: block;"> Ljung-Box Test: <br> <span class="math inline">\(H_0\)</span>:There are no autocorrelations in the series <br> <span class="math inline">\(H_1\)</span>: There are autocorrelations present in the series </span></p>
+<div style="font-size: 10px; color: black; line-height: 0.6; margin-top: 1em; text-align: center;">
+<table style="margin: 0 auto; border-collapse: collapse; width: 100%;">
+<tbody><tr>
+<th style="padding: 8px; border-bottom: 1px solid black; border-top: 1px solid black;">
+Asset
+</th>
+<th style="padding: 8px; border-bottom: 1px solid black; border-top: 1px solid black;">
+ARMA-GARCH
+</th>
+<th style="padding: 8px; border-bottom: 1px solid black; border-top: 1px solid black; font-weight: normal;">
+<span style="font-weight: bold; line-height :1.5; ">P-Values</span> <br> Ljung-Box Test on Squared Residuals
+</th>
+</tr>
+<tr>
+<td style="padding: 8px; ">
+ADAUSDT
+</td>
+<td style="padding: 8px;">
+ARMA-GARCH(0,0,1,1)
+</td>
+<td style="padding: 8px;">
+0.9877
+</td>
+</tr>
+<tr>
+<td style="padding: 8px;">
+ATOMUSDT
+</td>
+<td style="padding: 8px;">
+ARMA-GARCH(0,0,1,1)
+</td>
+<td style="padding: 8px;">
+0.7997
+</td>
+</tr>
+<tr>
+<td style="padding: 8px;">
+AVAXUSDT
+</td>
+<td style="padding: 8px;">
+ARMA-GARCH(0,0,1,1)
+</td>
+<td style="padding: 8px;">
+0.8036
+</td>
+</tr>
+<tr>
+<td style="padding: 8px;">
+BCHUSDT
+</td>
+<td style="padding: 8px;">
+ARMA-GARCH(0,0,1,3)
+</td>
+<td style="padding: 8px;">
+0.9495
+</td>
+</tr>
+<tr>
+<td style="padding: 8px;">
+BNBUSDT
+</td>
+<td style="padding: 8px;">
+ARMA-GARCH(0,0,1,1)
+</td>
+<td style="padding: 8px;">
+0.9493
+</td>
+</tr>
+<tr>
+<td style="padding: 8px;">
+BTCUSDT
+</td>
+<td style="padding: 8px;">
+ARMA-GARCH(0,0,1,3)
+</td>
+<td style="padding: 8px;">
+0.9317
+</td>
+</tr>
+<tr>
+<td style="padding: 8px;">
+DOGEUSDT
+</td>
+<td style="padding: 8px;">
+ARMA-GARCH(1,2,2,0)
+</td>
+<td style="padding: 8px;">
+0.9816
+</td>
+</tr>
+<tr>
+<td style="padding: 8px;">
+DOTUSDT
+</td>
+<td style="padding: 8px;">
+ARMA-GARCH(0,0,1,1)
+</td>
+<td style="padding: 8px;">
+0.5122
+</td>
+</tr>
+<tr>
+<td style="padding: 8px;">
+EOSUSDT
+</td>
+<td style="padding: 8px;">
+ARMA-GARCH(0,0,2,3)
+</td>
+<td style="padding: 8px;">
+0.8513
+</td>
+</tr>
+<tr>
+<td style="padding: 8px;">
+ETCUSDT
+</td>
+<td style="padding: 8px;">
+ARMA-GARCH(0,0,1,1)
+</td>
+<td style="padding: 8px;">
+0.5238
+</td>
+</tr>
+<tr>
+<td style="padding: 8px;">
+ETHUSDT
+</td>
+<td style="padding: 8px;">
+ARMA-GARCH(0,0,1,1)
+</td>
+<td style="padding: 8px;">
+0.9306
+</td>
+</tr>
+<tr>
+<td style="padding: 8px;">
+FILUSDT
+</td>
+<td style="padding: 8px;">
+ARMA-GARCH(0,0,1,1)
+</td>
+<td style="padding: 8px;">
+0.9876
+</td>
+</tr>
+<tr>
+<td style="padding: 8px;">
+FTMUSDT
+</td>
+<td style="padding: 8px;">
+ARMA-GARCH(0,0,1,1)
+</td>
+<td style="padding: 8px;">
+0.9235
+</td>
+</tr>
+<tr>
+<td style="padding: 8px;">
+LINKUSDT
+</td>
+<td style="padding: 8px;">
+ARMA-GARCH(0,0,1,1)
+</td>
+<td style="padding: 8px;">
+0.2498
+</td>
+</tr>
+<tr>
+<td style="padding: 8px;">
+LTCUSDT
+</td>
+<td style="padding: 8px;">
+ARMA-GARCH(0,0,1,1)
+</td>
+<td style="padding: 8px;">
+0.9130
+</td>
+</tr>
+<tr>
+<td style="padding: 8px;">
+MATICUSDT
+</td>
+<td style="padding: 8px;">
+ARMA-GARCH(0,0,1,1)
+</td>
+<td style="padding: 8px;">
+0.1706
+</td>
+</tr>
+<tr>
+<td style="padding: 8px;">
+NEARUSDT
+</td>
+<td style="padding: 8px;">
+ARMA-GARCH(0,0,1,1)
+</td>
+<td style="padding: 8px;">
+0.9279
+</td>
+</tr>
+<tr>
+<td style="padding: 8px;">
+SOLUSDT
+</td>
+<td style="padding: 8px;">
+ARMA-GARCH(0,0,1,1)
+</td>
+<td style="padding: 8px;">
+0.5712
+</td>
+</tr>
+<tr>
+<td style="padding: 8px;">
+TRXUSDT
+</td>
+<td style="padding: 8px;">
+ARMA-GARCH(0,0,1,1)
+</td>
+<td style="padding: 8px;">
+0.5337
+</td>
+</tr>
+<tr>
+<td style="padding: 8px; border-bottom: 1px solid black;">
+XRPUSDT
+</td>
+<td style="padding: 8px;border-bottom: 1px solid black;">
+ARMA-GARCH(2,2,1,2)
+</td>
+<td style="padding: 8px;border-bottom: 1px solid black;">
+1.0000
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+</section>
+<section id="preliminary-steps-1" class="slide level2" data-background-color="#FCF9ED">
+<h2><span style="color: #B7A137;"> Preliminary Steps</span></h2>
+<p><span style="font-size: 20px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> Fitting Marginal Distributions </span></p>
+<div class="columns">
+<div class="column" style="width:25%;">
+<span style="font-size: 14px; color: #B7A137; line-height: 2.0; display: block; margin-top: 1em;"> Fat tails and sharp peaks </span> 
+<div style="font-size: 10px; color: black; line-height: 1.0; margin-top: 5em; text-align: center;">
+<table style="margin: 0 auto; border-collapse: collapse;">
+<tbody><tr>
+<th style="padding: 10px; border-top: 1px solid black;">
+Asset
+</th>
+<th style="padding: 10px; border-top: 1px solid black;">
+Distribution
+</th>
+<th style="padding: 10px; border-top: 1px solid black;">
+Asset
+</th>
+<th style="padding: 10px; border-top: 1px solid black;">
+Distribution
+</th>
+</tr>
+<tr>
+<td style="padding: 10px;">
+BCHUSDT
+</td>
+<td style="padding: 10px;">
+laplace
+</td>
+<td style="padding: 10px;">
+XRPUSDT
+</td>
+<td style="padding: 10px;">
+laplace
+</td>
+</tr>
+<tr>
+<td style="padding: 10px;">
+BNBUSDT
+</td>
+<td style="padding: 10px;">
+laplace
+</td>
+<td style="padding: 10px;">
+ADAUSDT
+</td>
+<td style="padding: 10px;">
+logistic
+</td>
+</tr>
+<tr>
+<td style="padding: 10px;">
+BTCUSDT
+</td>
+<td style="padding: 10px;">
+laplace
+</td>
+<td style="padding: 10px;">
+ATOMUSDT
+</td>
+<td style="padding: 10px;">
+logistic
+</td>
+</tr>
+<tr>
+<td style="padding: 10px;">
+DOGEUSDT
+</td>
+<td style="padding: 10px;">
+laplace
+</td>
+<td style="padding: 10px;">
+AVAXUSDT
+</td>
+<td style="padding: 10px;">
+logistic
+</td>
+</tr>
+<tr>
+<td style="padding: 10px;">
+EOSUSDT
+</td>
+<td style="padding: 10px;">
+laplace
+</td>
+<td style="padding: 10px;">
+DOTUSDT
+</td>
+<td style="padding: 10px;">
+logistic
+</td>
+</tr>
+<tr>
+<td style="padding: 10px;">
+ETCUSDT
+</td>
+<td style="padding: 10px;">
+laplace
+</td>
+<td style="padding: 10px;">
+FTMUSDT
+</td>
+<td style="padding: 10px;">
+logistic
+</td>
+</tr>
+<tr>
+<td style="padding: 10px;">
+ETHUSDT
+</td>
+<td style="padding: 10px;">
+laplace
+</td>
+<td style="padding: 10px;">
+LINKUSDT
+</td>
+<td style="padding: 10px;">
+logistic
+</td>
+</tr>
+<tr>
+<td style="padding: 10px;">
+FILUSDT
+</td>
+<td style="padding: 10px;">
+laplace
+</td>
+<td style="padding: 10px;">
+MATICUSDT
+</td>
+<td style="padding: 10px;">
+logistic
+</td>
+</tr>
+<tr>
+<td style="padding: 10px;">
+LTCUSDT
+</td>
+<td style="padding: 10px;">
+laplace
+</td>
+<td style="padding: 10px;">
+NEARUSDT
+</td>
+<td style="padding: 10px;">
+logistic
+</td>
+</tr>
+<tr>
+<td style="padding: 10px;border-bottom: 1px solid black;" "="">TRXUSDT</td>
+<td style="padding: 10px;border-bottom: 1px solid black;" "="">laplace</td>
+<td style="padding: 10px;border-bottom: 1px solid black;" "="">SOLUSDT</td>
+<td style="padding: 10px; border-bottom: 1px solid black;">
+logistic
+</td>
+</tr>
+</tbody></table>
+</div>
+</div><div class="column" style="width:75%;">
+<p><img data-src="fitted_distributions.jpg" style="display: block; margin: auto;;width:70.0%"></p>
+</div>
+</div>
+</section>
+<section id="model-1---standard-one-factor-copula-model" class="slide level2" data-background-color="#FCF9ED">
+<h2><span style="color: #B7A137; font-size: 50px"> Model 1 - Standard One Factor Copula Model</span></h2>
+<p><span style="font-size: 20px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> Model Setup </span> <span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> In a one factor copula, we assume our variables of interest </span> <span style="font-size: 16px; color: #B7A137;; line-height: 1.0; display: block; margin-top: 1em;"> <span class="math display">\[X_{i1},...,X_{id} \in \mathbb{R} \qquad \text{ for } i = 1,...,n\]</span> </span> <span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> have been transformed to uniform random variables using their respective univariate marginal distributions </span> <span style="font-size: 16px; color: #B7A137;; line-height: 1.0; display: block; margin-top: 1em;"> <span class="math display">\[U_{i1},...,U_{id} \sim Uniform(0,1) \qquad \text{ for } i = 1,...,n \]</span> </span> <span style="font-size: 16px; color: black; line-height: 1.5; display: block; margin-top: 1em;"> We further assume that <span class="math inline">\(U_{i1},...,U_{id}\)</span> are conditionally independent given the latent variable <span class="math inline">\(V_1\)</span>, and we assume <span class="math inline">\(V_1 \sim Uniform(0,1)\)</span> <br> Then, let <span class="math inline">\(F_{U_j|V_1}\)</span> denote the conditional cumulative distribution function of <span class="math inline">\(U_j\)</span> given <span class="math inline">\(V_1\)</span>, we have: </span> <span style="font-size: 16px; color: #B7A137;; line-height: 1.0; display: block; margin-top: 1em;"> <span class="math display">\[
+    F_{X_1,...,X_d}(x_{i1},...,x_{id}) = C(u_{i1},...,u_{id}) = \int_0^1 \prod_{j=1}^{d}F_{U_j|V_1}(u_{ij}|v_{1})dv_1  = \int_0^1 \prod_{j=1}^{d}C_{U_j|V_1}(u_{ij}|v_{1})dv_1
+\]</span> </span></p>
+<p><span style="font-size: 16px; color: black; line-height: 1.5; display: block; margin-top: 1em;"> Since <span class="math inline">\(U_j\)</span> and <span class="math inline">\(V_1\)</span> are <span class="math inline">\(Uniform(0,1)\)</span> random variables, and </span> <span style="font-size: 16px; color: #B7A137;; line-height: 1.0; display: block; margin-top: 1em;"> <span class="math display">\[F_{U_j|V_1} (u_{ij}|v_{1}) = \frac{\partial }{\partial V_1}C_{U_j,V_1}(u_j,v_1) = C_{U_j|V_1}(u_j|v_1)\]</span> </span> <span style="font-size: 16px; color: black; line-height: 1.5; display: block; margin-top: 1em;"> Therefore,<br>
+</span> <span style="font-size: 16px; color: #B7A137;; line-height: 1.0; display: block; margin-top: 1em;"> <span class="math display">\[c(u_{i1},...,u_{id}) = \frac{\partial^d}{\partial u_{i1},...,u_{id}}C(u_{i1},...,u_{id}) = \int_0^1\prod_{j=1}^d c_{U_j, V_1}(u_{ij},v_{1})dv_1\]</span> </span> <span style="font-size: 16px; color: black; line-height: 1.5; display: block; margin-top: 1em;"> since </span> <span style="font-size: 16px; color: #B7A137;; line-height: 1.0; display: block; margin-top: 1em;"> <span class="math display">\[\frac{\partial}{\partial u_{ij}}C_{U_j|V_1}(u_{ij}|v_{1}) = \frac{\partial^2}{\partial U_j \partial V_1} C_{U_j, V_1}(u_{ij},v_{1}) = c_{U_j, V_1}(u_{ij},v_{1})\]</span> </span></p>
+</section>
+<section id="model-1---standard-one-factor-copula-model-1" class="slide level2" data-background-color="#FCF9ED">
+<h2><span style="color: #B7A137; font-size: 55px;"> Model 1 - Standard One Factor Copula Model</span></h2>
+<p><span style="font-size: 20px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> Model Results </span> <span style="color: black; font-size: 14px;"> The tail weighted measure of dependence is defined as: </span> <span style="color: #B7A137; font-size: 14px;"> <span class="math display">\[\begin{equation} \label{eq:tail_weighted_measure_of_dependence}
+\rho_L(a,p) = Cor\left( a\left(1 - \frac{1-U_1}{p}\right), a\left(1 - \frac{1-U_2}{p}\right) \middle| U_1 &lt; p, U_2 &lt; p \right)
+\end{equation}\]</span> <span class="math display">\[\rho_U(a,p)= Cor\left ( a\left(1 - \frac{1-U_1}{p}\right), a\left(1  - \frac{1-U_2}{p}\right) \middle| 1-U_1 &lt; p, 1- U_2 &lt; p\right)\]</span> </span> <span style="color: black; font-size: 14px; line-height :2; display:block;"> where <br> - <span class="math inline">\(\rho_U\)</span> and <span class="math inline">\(\rho_L\)</span> are the upper and lower tail-weighted dependence measures <br> - <span class="math inline">\(a(\cdot)\)</span> : <span class="math inline">\([0,1]\rightarrow (0,\infty)\)</span> is a continuous function <br> - <span class="math inline">\(p\)</span> is the truncation level satisfying <span class="math inline">\(0&lt;p\leq 0.5\)</span> <br> </span></p>
+<div class="columns">
+<div class="column" style="width:30%;">
+<p><span style="color: black; font-size: 14px; line-height :1.5; display:block;"> We take <span class="math inline">\(a\)</span> to be the power function <span class="math inline">\(a(u) = u^k\)</span> and define squared errors for the tail-weighted measure of dependence as follows: </span></p>
+<p><span style="color: #B7A137; font-size: 14px;"> <span class="math display">\[
+\text{SE Upper Tail} = \sum_i^d\sum_j^d(\rho_{U; i,j}^{\text{simulated}} - \rho_{U; i,j}^{\text{observed}})^2 \\
+\text{SE Lower Tail} = \sum_i^d\sum_j^d(\rho_{L; i,j}^{\text{simulated}} - \rho_{L; i,j}^{\text{observed}})^2
+\]</span> </span></p>
+</div><div class="column" style="width:70%;">
+<div style="font-size: 12px; color: black; text-align: center; margin-top: 2em;">
+<table style="margin: 0 auto; border-collapse: collapse; width: 80%;">
+<!-- Apply top border only on the first row -->
+<tbody><tr>
+<th style="padding: 10px; border-top: 1px solid black; border-bottom: 1px solid black;">
+Copula
+</th>
+<th style="padding: 10px; border-top: 1px solid black; border-bottom: 1px solid black;">
+AIC
+</th>
+<th style="padding: 10px; border-top: 1px solid black; border-bottom: 1px solid black;">
+BIC
+</th>
+<th style="padding: 10px; border-top: 1px solid black; border-bottom: 1px solid black;">
+Upper Tail Dependence Measure Squared Error
+</th>
+<th style="padding: 10px; border-top: 1px solid black; border-bottom: 1px solid black;">
+Lower Tail Dependence Measure Squared Error
+</th>
+</tr>
+<tr>
+<td style="padding: 10px; border-bottom: 1px solid black;">
+Gaussian
+</td>
+<td style="padding: 10px; border-bottom: 1px solid black;">
+-25278.32
+</td>
+<td style="padding: 10px; border-bottom: 1px solid black;">
+-25173.28
+</td>
+<td style="padding: 10px; border-bottom: 1px solid black; color: green;">
+<strong>2.57</strong>
+</td>
+<td style="padding: 10px; border-bottom: 1px solid black;">
+28.77
+</td>
+</tr>
+<tr>
+<td style="padding: 10px; border-bottom: 1px solid black;">
+Clayton
+</td>
+<td style="padding: 10px; border-bottom: 1px solid black;">
+-26273.95
+</td>
+<td style="padding: 10px; border-bottom: 1px solid black;">
+-26168.91
+</td>
+<td style="padding: 10px; border-bottom: 1px solid black;">
+35.78
+</td>
+<td style="padding: 10px; border-bottom: 1px solid black;">
+2.24
+</td>
+</tr>
+<tr>
+<td style="padding: 10px; border-bottom: 1px solid black;">
+Gumbel
+</td>
+<td style="padding: 10px; border-bottom: 1px solid black;">
+-23113.67
+</td>
+<td style="padding: 10px; border-bottom: 1px solid black;">
+-23008.63
+</td>
+<td style="padding: 10px; border-bottom: 1px solid black;">
+27.41
+</td>
+<td style="padding: 10px; border-bottom: 1px solid black;">
+94.46
+</td>
+</tr>
+<tr>
+<td style="padding: 10px; border-bottom: 1px solid black;">
+Reflected Gumbel
+</td>
+<td style="padding: 10px; border-bottom: 1px solid black;">
+-28705.38
+</td>
+<td style="padding: 10px; border-bottom: 1px solid black;">
+-28600.34
+</td>
+<td style="padding: 10px; border-bottom: 1px solid black;">
+3.17
+</td>
+<td style="padding: 10px; border-bottom: 1px solid black; color: green;">
+<strong>0.99</strong>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+</section>
+<section id="model-2---dynamic-dependence-structure" class="slide level2" data-background-color="#FCF9ED">
+<h2><span style="color: #B7A137; font-size: 55px;"> Model 2 - Dynamic Dependence Structure </span></h2>
+<p><span style="font-size: 20px; color: black; line-height: 2.0; display: block; margin-top: 1em;"> Model Setup </span> <span style="font-size: 18px; color: black; line-height: 2; display: block; margin-top: 2em;"> Non-parametric, dynamic modelling of the dependence parameters. <br> <br> Find the maximum likelihood estimators <span class="math inline">\(\widehat{\theta}_{jTd_m}\)</span> for <span class="math inline">\(j = 1,..,p\)</span> and <span class="math inline">\(d_m \in {T,...,N}\)</span> </span> <span style="font-size: 18px; color: #B7A137; line-height: 2.0; display: block; margin-top: 1em;"> <span class="math display">\[L(\mathbf{u_1},...,\mathbf{u_d};  \theta_{1Td_m},..., \theta_{dTd_m}) = \prod_{i=d_m-T+1}^{d_m} \int_0^1\prod_{j=1}^d c_{U_j, V_1}(u_{ij},v_{1}; \theta_{jTd_m})dv_{1}\]</span> </span> <span style="font-size: 18px; color: black; line-height: 2.5; display: block; margin-top: 1em;"> T is the rolling-window size. <br> By minimizing the negative of the log likelihood below: </span> <span style="font-size: 18px; color: #B7A137; line-height: 2.0; display: block; margin-top: 1em;"> <span class="math display">\[l(\mathbf{u_1},..,\mathbf{u_d}; \theta_{1Td_m},..., \theta_{dTd_m}) = \sum_{i=d_m-T+1}^{d_m} log\left(\int_0^1\prod_{j=1}^dc_{U_{j}, V_{1}}(u_{ij}, v_{1}; \theta_{jTd_m})dv_{1}\right)\]</span> </span></p>
+</section>
+<section id="model-2---dynamic-dependence-structure-1" class="slide level2" data-background-color="#FCF9ED">
+<h2><span style="color: #B7A137; font-size: 55px;"> Model 2 - Dynamic Dependence Structure </span></h2>
+<p><span style="font-size: 20px; color: black; line-height: 2.0; display: block; margin-top: 1em;"> Model Results </span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="dynamic_dependence_gaussian_90.jpg" style="display: block; margin: auto;;width:100.0%"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="dynamic_dependence_gumbel_90.jpg" style="display: block; margin: auto;;width:100.0%"></p>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="dynamic_dependence_rgumbel_90.jpg" style="display: block; margin: auto;;width:100.0%"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="dynamic_dependence_clayton_90.jpg" style="display: block; margin: auto;;width:100.0%"></p>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:100%;">
+<div style="font-size: 11px; color: black; text-align: center; margin-top: 1em;">
+<table style="margin: 0 auto; border-collapse: collapse; width: 100%;">
+<tbody><tr>
+<th style="padding: 6px; border-bottom: 1px solid black; border-top: 1px solid black;">
+Metric
+</th>
+<th style="padding: 6px; border-bottom: 1px solid black; border-top: 1px solid black;">
+Gaussian
+</th>
+<th style="padding: 6px; border-bottom: 1px solid black; border-top: 1px solid black;">
+Clayton
+</th>
+<th style="padding: 6px; border-bottom: 1px solid black; border-top: 1px solid black;">
+Gumbel
+</th>
+<th style="padding: 6px; border-bottom: 1px solid black; border-top: 1px solid black;">
+Reflected Gumbel
+</th>
+</tr>
+<tr><td style="padding: 6px; border-bottom: 1px solid black;">
+BIC (90 days)
+</td>
+<td style="padding: 6px; border-bottom: 1px solid black;">
+-1770.87
+</td>
+<td style="padding: 6px; border-bottom: 1px solid black;">
+-1725.43
+</td>
+<td style="padding: 6px; border-bottom: 1px solid black;">
+-1611.80
+</td>
+<td style="padding: 6px; border-bottom: 1px solid black; color:green;">
+-1916.57
+</td>
+</tr>
+<tr>
+<td style="padding: 6px; border-bottom: 1px solid black;">
+BIC (180 days)
+</td>
+<td style="padding: 6px; border-bottom: 1px solid black;">
+-3517.76
+</td>
+<td style="padding: 6px; border-bottom: 1px solid black;">
+-3499.95
+</td>
+<td style="padding: 6px; border-bottom: 1px solid black;">
+-3209.71
+</td>
+<td style="padding: 6px; border-bottom: 1px solid black;color:green;">
+-3863.24
+</td>
+</tr>
+<tr>
+<td style="padding: 6px; border-bottom: 1px solid black;">
+BIC (360 days)
+</td>
+<td style="padding: 6px; border-bottom: 1px solid black;">
+-7146.74
+</td>
+<td style="padding: 6px; border-bottom: 1px solid black;">
+-7176.75
+</td>
+<td style="padding: 6px; border-bottom: 1px solid black;">
+-6578.48
+</td>
+<td style="padding: 6px; border-bottom: 1px solid black;color:green;">
+-7905.84
+</td>
+</tr>
+<tr>
+<td style="padding: 6px; border-bottom: 1px solid black;">
+BIC (720 days)
+</td>
+<td style="padding: 6px; border-bottom: 1px solid black;">
+-14409.90
+</td>
+<td style="padding: 6px; border-bottom: 1px solid black;">
+-14579.52
+</td>
+<td style="padding: 6px; border-bottom: 1px solid black;">
+-13361.49
+</td>
+<td style="padding: 6px; border-bottom: 1px solid black;color:green;">
+-13361.49
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<!------------------------------------------ Slide 19 ------------------------------------------------>
+</section>
+<section id="model-2---dynamic-dependence-structure-2" class="slide level2" data-background-color="#FCF9ED">
+<h2><span style="color: #B7A137; font-size: 55px;"> Model 2 - Dynamic Dependence Structure </span></h2>
+<p><span style="font-size: 20px; color: black; line-height: 2.0; display: block; margin-top: 1em;"> Model Results </span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="upper_dependence_error_90days.jpeg" style="display: block; margin: auto;;width:100.0%"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="lower_dependence_error_90days.jpeg" style="display: block; margin: auto;;width:100.0%"></p>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="upper_dependence_error_180days.jpeg" style="display: block; margin: auto;;width:100.0%"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="lower_dependence_error_180days.jpeg" style="display: block; margin: auto;;width:100.0%"></p>
+</div>
+</div>
+<!------------------------------------------ Slide 20 ------------------------------------------------>
+</section>
+<section id="model-3---copula-switching-with-dynamic-dependence-structure" class="slide level2" data-background-color="#FCF9ED">
+<h2><span style="color: #B7A137; font-size: 40px;"> Model 3 - Copula Switching with Dynamic Dependence Structure</span></h2>
+<p><span style="font-size: 20px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> Model Setup and Results <br> </span></p>
+<p><span style="font-size: 16px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> In this setting, we dynamically choose the best fitting copula based on the <strong>total squared errors</strong> of the <strong>tail weighted dependence measures</strong>. </span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="copula_switching_90_days_tau_MATIC.jpeg" style="display: block; margin-top: 1em;;width:100.0%"> <span style="color: #B7A137; font-size: 12px; margin-top: 0em; margin_bottom: 0em;"> Gaussian: 15.67% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Gumbel: 0.38% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Reflected Gumbel 72.45% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Clayton: 11.51%</span></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="copula_switching_180_days_tau_MATIC.jpeg" style="display: block; margin-top: 1em;;width:100.0%"> <span style="color: #B7A137; font-size: 12px; margin-top: 0em;"> Gaussian: 5.28% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Gumbel: 0% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Reflected Gumbel 91.96% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Clayton: 2.76%</span></p>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<img data-src="copula_switching_360_days_tau_MATIC.jpeg" style="display: block; margin: 0;;width:100.0%">
+<div style="font-size: 11px; color: black; text-align: center; margin-top: 0em;">
+<p><span style="color: #B7A137; font-size: 12px; margin-top: 0em;"> Gaussian: 0.95% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Gumbel: 0% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Reflected Gumbel 98.67% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Clayton: 0.38%</span></p>
+</div>
+</div><div class="column" style="width:50%;">
+<img data-src="copula_switching_720_days_tau_MATIC.jpeg" style="display: block; margin: 0;;width:100.0%">
+<div style="font-size: 11px; color: black; text-align: center; margin-top: 0em;">
+<p><span style="color: #B7A137; font-size: 12px; margin-top: 0em;"> Gaussian: 0% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Gumbel: 0% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Reflected Gumbel 100% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Clayton: 0%</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="model-4---factor-copula-model-with-group-structure" class="slide level2" data-background-color="#FCF9ED">
+<h2><span style="color: #B7A137; font-size: 55px;"> Model 4 - Factor Copula Model with Group Structure</span></h2>
+<p><span style="font-size: 20px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> Model Setup </span></p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img data-src="factor_copula_with_group_structure.png" style="display: block; margin: auto;;width:80.0%"></p>
+</div><div class="column" style="width:60%;">
+<p><span style="font-size: 20px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> <strong>Market Leaders and Institutional-Grade Assets</strong><br> </span> <span style="font-size: 12px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> - most established and high-profile cryptocurrencies, often referred to as “blue-chip” assets within the crypto space <br> - Favored by institutional investors, have the highest levels of liquidity <br> - Recognized for their dominance and pivotal role in the broader ecosystem <br> </span> <span style="font-size: 20px; color: black; line-height: 1.0; display: block; margin-top: 2.5em;"> <strong>Legacy and High-Liquidity Assets</strong> </span> <span style="font-size: 12px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> - Established assets that have existed for several years and are widely recognized in the market <br> - Early adopters of blockchain technology, playing a prominent role in the space <br> - Frequently used for payments, trading, and as investment vehicles <br> </span> <span style="font-size: 20px; color: black; line-height: 1.0; display: block; margin-top: 3em;"> <strong>Emerging Smart Contract and DeFi Platforms</strong> </span></p>
+<p><span style="font-size: 12px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> - Newer platforms that prioritize scalability, fast transactions <br> - Innovative technology to support decentralized applications and DeFi ecosystems <br> - Offering more efficient and scalable solutions for developers </span></p>
+<p><span style="font-size: 20px; color: black; line-height: 1.0; display: block; margin-top: 3em;"> <strong>Technologically Advanced and Developer-Focused Platforms</strong> </span> <span style="font-size: 12px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> - Assets backed by platforms known for their advanced technological frameworks <br> - Scalability, interoperability, and smart contract capabilities </span></p>
+</div>
+</div>
+<!--------------------Slide 21 ---------------------------->
+</section>
+<section id="model-4---factor-copula-model-with-group-structure-1" class="slide level2" data-background-color="#FCF9ED">
+<h2><span style="color: #B7A137; font-size: 55px;"> Model 4 - Factor Copula Model with Group Structure</span></h2>
+<span style="font-size: 20px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> Model Results </span> <span style="color: #B7A137; font-size: 16px;"> Estimated Reflected Gumbel Copula Parameters with Group Structure - Static Model</span>
+<div style="font-size: 12px; color: black; text-align: center; margin-top: 0.5em;">
+<table style="margin: 0 auto; border-collapse: collapse; width: 100%;">
+<!-- First Table Header -->
+<tbody><tr style="border-top: 1px solid black;">
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+Estimated Parameters
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+ADA
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+ATOM
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+AVAX
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+BCH
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+BNB
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+BTC
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+DOGE
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+DOT
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+EOS
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+ETC
+</th>
+</tr>
+<!-- First Row Without Group Structure -->
+<tr>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+Without Group Structure
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+3.109
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+2.543
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+2.658
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+2.849
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+2.541
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+2.856
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+2.322
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+3.289
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+3.101
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+3.295
+</td>
+</tr>
+<!-- Second Row With Group Structure -->
+<tr>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+With Group Structure
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green">
+3.188
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green">
+2.687
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green">
+2.798
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green">
+3.268
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green">
+2.547
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green">
+3.546
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green">
+2.325
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green">
+3.466
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green">
+3.428
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green">
+3.550
+</td>
+</tr>
+<!-- Second Table Header -->
+<tr style="border-top: 1px solid black;">
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+Estimated Parameters
+</td>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+ETH
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+FIL
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+FTM
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+LINK
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+LTC
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+MATIC
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+NEAR
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+SOL
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+TRX
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+XRP
+</th>
+</tr>
+<!-- Third Row Without Group Structure -->
+<tr>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+Without Group Structure
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+3.372
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+2.475
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+2.384
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+2.955
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+2.880
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+2.780
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+2.314
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+2.236
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+2.024
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+2.336
+</td>
+</tr>
+<!-- Fourth Row With Group Structure -->
+<tr style="border-bottom: 1px solid black;">
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+With Group Structure
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green;">
+3.987
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+2.197
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green;">
+2.666
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+2.899
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green;">
+3.137
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green;">
+2.964
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green;">
+2.668
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green;">
+2.283
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+2.007
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green;">
+2.388
+</td>
+</tr>
+</tbody></table>
+</div>
+<span style="color: #B7A137; font-size: 16px;"> Average Tail Weighted Measure of Dependence Measure Squared Error with Group Structure - Dynamic Dependence Model</span>
+<div style="font-size: 12px; color: black; text-align: center; margin-top: 1em;">
+<table style="margin: 0 auto; border-collapse: collapse; width: 100%;">
+<!-- First Table Header -->
+<tbody><tr style="border-top: 1px solid black;">
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+Total Squared Error
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+Upper Tail
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+Lower Tail
+</th>
+</tr>
+<tr style="border-top: 1px solid black;">
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+Simulated data without group structure
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+10.6352
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+6.4047
+</th>
+</tr>
+<tr style="border-top: 1px solid black;">
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black;">
+Total Squared Error
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green;">
+2.567
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; color: green;">
+1.9000
+</th>
+</tr>
+</tbody></table>
+</div>
+<!------------------Slide 23-------------------------------->
+</section></section>
+<section>
+<section id="topic-4-computational-details" class="title-slide slide level1 center" data-background-color="#ECFADC">
+<h1><span style="color: #2F6050;"> Topic 4: Computational Details </span></h1>
+<!------------------Slide 24-------------------------------->
+</section>
+<section id="computational-complexity-of-the-one-factor-copula-model" class="slide level2" data-background-color="#ECFADC">
+<h2><span style="color: #2F6050; font-size: 55px;"> Computational Complexity of the One Factor Copula Model</span></h2>
+<p><span style="font-size: 14px; color: black; line-height: 1.0; display: block; margin-top: 2em;"> The likelihood function for the <strong>one factor copula model</strong> with <span class="math inline">\(n\)</span> observations and <span class="math inline">\(d\)</span> variables is defined as: </span></p>
+<p><span style="font-size: 14px; color: #2F6050; line-height: 2.0; display: block; margin-top: 2em;"> <span class="math display">\[L(\mathbf{u_1},...,\mathbf{u_d}; \theta_1,...\theta_d) = \prod_{i=1}^n \int_0^1\prod_{j=1}^d c_{U_j, V_1}(u_{ij},v_1; \theta_j)dv_{1}\]</span> </span> <span style="font-size: 14px; color: black; line-height: 1.0; display: block; margin-top: 1em;"></span></p>
+<span style="font-size: 14px; color: black; line-height: 1.0; display: block; margin-top: 2em;">Computing the likelihood for a factor copula model can be <strong>computationally expensive</strong> for several reasons <br>
+<ul style="margin-top: 0.5em; margin-left:3em; line-height: 2">
+<li>
+For <strong>each observation each variable</strong>, we need to compute the values of all the bi-variate copula density
+</li>
+<li>
+The product of the <span class="math inline">\(d\)</span> bivariate copula densities must be <strong>integrated out with respect to the latent variable</strong> using the Gauss-Legendre method <br> e.g.&nbsp;for each observation <span class="math inline">\(i\)</span> and <span class="math inline">\(m\)</span> number of quadrature points, we need to compute <span class="math inline">\(m \times d\)</span> number of bi-variate copula densities
+</li><li>
+The likelihood function needs to be evaluated <strong>multiple times</strong> to find the optimal value
+</li>
+</ul>
+<p> e.g.&nbsp;with 2,000 observations, 20 variables and 35 quadrenture points, we need to compute 1.4 million bivariate copula densities; if the optimization algorithm converges in 100 iterations, the total number of calculations becomes 140 million <span style="font-size: 14px; color: black; line-height: 1.0; display: block; margin-top: 1em;"> Furthermore, the derivative of the log likelihood function with respect to a parameter <span class="math inline">\(\theta_k\)</span> can be derived as: </span> <span style="font-size: 14px; color: #2F6050; line-height: 2.0; display: block; margin-top: 2em;"> <span class="math display">\[\frac{\partial}{\partial \theta_k}l(\mathbf{u_1},..,\mathbf{u_d}; \theta_1,..., \theta_d) = \sum_{i=1}^n \left\{\frac{\int_0^1\prod_{j\neq k}c_{U_j,V_{1}}(u_{ij}, v_{1}, \theta_j) \frac{\partial}{\partial \theta_k}c_{u_k, v_1}(u_{ik}, v_{1}; \theta_k)dv_{1}}{\int_0^1\prod_{j = 1}^d c_{U_j,V_{1}}
+(u_{ij}, v_{1}, \theta_j)}   \right\} \]</span> </span> <span style="font-size: 14px; color: black; line-height: 2.0; display: block; margin-top: em;"> For each iteration of the optimization process, we must compute <span class="math inline">\(n \times d \times m\)</span> bi-variate copula values and their corresponding derivatives for each model parameter, further compounding the computational cost. </span></p>
+<!------------------Slide 25-------------------------------->
+</span></section>
+<section id="optimization-strategies" class="slide level2" data-background-color="#ECFADC">
+<h2><span style="color: #2F6050; font-size: 55px;"> Optimization Strategies </span></h2>
+<span style="font-size: 18px; color: black; line-height: 2.5; display: block; margin-top: 5em;">
+<ul style="margin-top: 0.5em; margin-left:3em">
+<li>
+<strong>Use of Gauss-Legendre Method for Numerical Integration</strong>
+</li>
+<li>
+<strong>Extensive Use of Matrix Operations with Efficient Packages</strong>
+</li>
+<li>
+<strong>Efficient Product Calculation Using apply(), mapply() and do.call()</strong>
+</li>
+<li>
+<strong>Mathematical Techniques</strong>
+</li>
+<li>
+<strong>Efficient Handling of Gradients</strong>
+</li>
+<li>
+<strong>Reuse of Intermediate Calculations</strong>
+</li>
+<li>
+<strong>Use of Parallel Processing</strong>
+</li>
+<li>
+<strong>Use of Rcpp for C++ Functions</strong>
+</li>
+</ul>
+<!------------------Slide 26-------------------------------->
+</span></section>
+<section id="optimization-strategies-contd" class="slide level2" data-background-color="#ECFADC">
+<h2><span style="color: #2F6050; font-size: 55px;"> Optimization Strategies (Cont’d) </span></h2>
+<span style="font-size: 18px; color: black; line-height: 1.0; display: block; margin-top: 5em;">
+<ul style="margin-top: 0.5em; margin-left:3em">
+<li>
+<strong>Use of Gauss-Legendre Method for Numerical Integration</strong>
+</li>
+<ul style="margin-top: 0.2em; margin-left: 1em;">
+<span style="font-size: 15px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+<li>
+In the Gauss-Legendre method, the integral of a function <span class="math inline">\(f(x)\)</span> over the interval <span class="math inline">\([-1,1]\)</span> with <span class="math inline">\(\mathbf{m}\)</span> <strong>number of quadrature points</strong> is approximated as:  <span style="font-size: 18px; color: #2F6050; line-height: 2.0; display: block; margin-top: 1em;"> <span class="math display">\[\int_{-1}^{1}f(x)dx \approx \sum_{k=1}^{m}w_kf(x_k)\]</span> </span>
+</li></span></ul>
+<span style="font-size: 18px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+<li>
+<strong>Extensive Use of Matrix Operations</strong>
+</li>
+</span>
+<ul style="margin-top: 0.2em; margin-left: 1em;">
+<span style="font-size: 15px; color: black; line-height: 1.0; display: block; margin-top: 1em;">
+<li>
+For example, to perform the numerical integration in both the likelihood and the derivative functions, we define a matrix <span class="math inline">\(V \in \mathbb{R}^{d \times m}\)</span>  <span style="font-size: 14px; color: #2F6050; line-height: 2.0; display: block; margin-top: 1em;"> <span class="math display">\[V =
+    \begin{bmatrix}
+      v_{11} &amp; v_{12} &amp; \cdots &amp; v_{1m} \\
+      v_{21} &amp; v_{22} &amp; \cdots &amp; v_{2m} \\
+      \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
+      v_{d1} &amp; v_{d2} &amp; \cdots &amp; v_{dm}
+    \end{bmatrix}
+    \]</span> </span> <span style="font-size: 14px; color: black; line-height: 2.0; display: block; margin-top: 1em;">
+<ul style="margin-top: 0.2em; margin-left: 1em;">
+<li>
+Gauss-Legendre quadrature points are replicated across observations
+</li>
+<li>
+Elliminate the need to recalculate these values for every loop iteration, leveraging vectorized computations
+</li>
+<li>
+The integral is also recycled to calculate both the likelihood function value as well as the derivative
+</li>
+</ul>
+</span></li>
+</span></ul>
+</ul>
+</span></section>
+<section id="optimization-strategies-contd-1" class="slide level2" data-background-color="#ECFADC">
+<h2><span style="color: #2F6050; font-size: 45px;"> Optimization Strategies (Cont’d) </span></h2>
+<span style="font-size: 18px; color: black; line-height: 2.5; display: block; margin-top: 1em;">
+<ul style="margin-top: 0.2em; margin-left: 1em; margin-bottom:0em;">
+<li>
+<strong>Mathematical Techniques</strong>
+</li>
+<ul style="margin-top: 0.2em; margin-left: 1em; margin-top: 0em">
+<span style="font-size: 14px; color: black; line-height: 2.0; display: block; margin-top: 0em;">
+<li>
+<strong>Gaussian One Factor Copula</strong>: the <span class="math inline">\(j \neq k\)</span> term cancels<br>  <span style="font-size: 14px; color: #2F6050; line-height: 2.5; display: block; margin-top: 1em;">
+<ul style="margin-top: 0.5em; margin-left:3em">
+<span class="math display">\[
+    \frac{\partial}{\partial \rho_k}l(\mathbf{u_1},..,\mathbf{u_d}; \rho_1,..., \rho_d) = \sum_{i=1}^n \left\{\frac{\int_0^1\prod_{j=1}^dc_{U_j,V_{1}}(u_{ij}, v_{1}, \rho_j) \frac{\rho_k(1-\rho_k^2) + \Phi^{-1}(u_{ik})\Phi^{-1}(v_{1})(1+\rho_k^2) - \rho_k(\Phi^{-1}(u_{ik})^2 + \Phi^{-1}(v_{1})^2)}{(1-\rho_k^2)^2}dv_{1}}{\int_0^1\prod_{j=1}^dc_{U_k,V_{1}}(u_{ik}, v_{1}, \rho_k) dv_{1}}   \right\}
+    \]</span> 
+
+</ul>
+<span style="font-size: 12px; color: black; line-height: 2; display: block; margin-top: 1em;">
+</span></span></li><li>
+<p><strong>Gumbel and Clayton One Factor Copula</strong> <br>  <span style="margin-left: 20px; line-height:2;">Problem: The <span class="math inline">\(j \neq k\)</span> term does not cancel</span><br> <span style="margin-left: 20px; line-height:2;">Solution:</span> </p>
+<span style="font-size: 14px; color: #2F6050; line-height: 2.5; display: block; margin-top: 1em;"> <span class="math display">\[
+    A =
+    \begin{bmatrix}
+        c_{U_1,V_{1}}(u_{i1}, v_{1}) &amp; c_{U_2,V_{1}}(u_{i2}, v_{1}) &amp; \cdots &amp; c_{U_d,V_{1}}(u_{id}, v_{1}) \\
+        c_{U_1,V_{1}}(u_{i1}, v_{1}) &amp; c_{U_2,V_{1}}(u_{i2}, v_{1}) &amp; \cdots &amp; c_{U_d,V_{1}}(u_{id}, v_{1}) \\
+        \vdots                       &amp; \vdots                         &amp; \vdots &amp; \vdots                        \\
+        c_{U_1,V_{1}}(u_{i1}, v_{1}) &amp; c_{U_2,V_{1}}(u_{i2}, v_{1}) &amp; \cdots &amp; c_{U_d,V_{1}}(u_{id}, v_{1})
+    \end{bmatrix}
+    \qquad
+    B =
+    \begin{bmatrix}
+        c_{U_1,V_{1}}(u_{i1}, v_{1}) &amp; c_{U_2,V_{1}}(u_{i2}, v_{1}) &amp; \cdots &amp; c_{U_d,V_{1}}(u_{id}, v_{1})
+    \end{bmatrix}
+\]</span> <span style="font-size: 14px; color: black; line-height: 2.5; display: block; margin-top: 2em;"> so that when we compute the column products of the matrix A, the matrix becomes: </span> <span style="font-size: 14px; color: #2F6050; line-height: 2.5; display: block; margin-top: 1em;"> <span class="math display">\[\begin{align*}
+    A_{prod}=
+    \begin{bmatrix}
+        \prod_{j=1}^dc_{U_k,V_{1}}(u_{ik}, v_{1}, \theta_k)  &amp; \prod_{j=1}^dc_{U_k,V_{1}}(u_{ik}, v_{1}, \theta_k) &amp; \cdots &amp; \prod_{j=1}^dc_{U_k,V_{1}}(u_{ik}, v_{1}, \theta_k) \\
+    \end{bmatrix}
+\end{align*}\]</span> </span> <span style="font-size: 14px; color: #2F6050; line-height: 2.5; display: block; margin-top: 1em;"> Finally, dividing by the row vector B, we have: </span> <span style="font-size: 14px; color: #2F6050; line-height: 2.5; display: block; margin-top: 1em;"> <span class="math display">\[\begin{align*}
+    \frac{A_{prod}}{B} =
+    \begin{bmatrix}
+        \prod_{j \neq 1}c_{U_k,V_{1}}(u_{ik}, v_{1}, \theta_k)  &amp; \prod_{j \neq 2}c_{U_k,V_{1}}(u_{ik}, v_{1}, \theta_k) &amp; \cdots &amp; \prod_{j \neq d}c_{U_k,V_{1}}(u_{ik}, v_{1}, \theta_k) \\
+    \end{bmatrix} \\
+    \\
+\end{align*}\]</span>
+</span></span></li></span></ul>
+</ul>
+</span>
+
+<!-----------------------slide 28 ---------------------------------->
+</section>
+<section id="performance-benchmarking" class="slide level2" data-background-color="#ECFADC">
+<h2><span style="color: #2F6050; font-size: 55px;"> Performance Benchmarking </span></h2>
+<div class="columns">
+<div class="column" style="width:35%;">
+<p><span style="color: #2F6050; font-size: 12px; margin-left:2em"><strong>Hardware Specifications</strong></span></p>
+</div><div class="column" style="width:65%;">
+<div style="font-size: 10px; color: black; line-height: 1.0; margin-top: 5em; align: left;">
+<table style="margin: 0 auto; border-collapse: collapse;">
+<tbody><tr>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+Chip
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+CPU
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+Number of Cores
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+Memory
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+Operating System
+</th>
+</tr>
+<tr>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+Apple M2
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+ARM64
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+8 (4 performance, 4 efficiency)
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+24 GB
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+macOS
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:35%;">
+<ul style="font-size: 12px; color: #2F6050; line-height: 2.5; margin-top: 2em; margin-left: 3em">
+<li>
+For the static one-factor copula model, our package performs:
+<ul>
+<li>
+Gaussian: 8.5 times faster than the existing R package <code>FactorCopula</code>
+</li>
+<li>
+Gumbel: 30% faster
+</li>
+<li>
+Reflected Gumbel: 30% faster
+</li>
+</ul>
+</li>
+</ul>
+</div><div class="column" style="width:65%;">
+<span style="color: #2F6050; font-size: 12px; margin-top: 2em; display: block; margin-left: 5em"> Runtime Comparison - Static Model </span>
+<div style="font-size: 10px; color: black; line-height: 1.0; margin-top: 1em; text-align: center;">
+<table style="margin: 0 auto; border-collapse: collapse;">
+<tbody><tr>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+Copula
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+<span class="math inline">\(\texttt{FactorCopula}\)</span>
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+<span class="math inline">\(\texttt{DDCopula}\)</span>
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+<span class="math inline">\(\texttt{FactorCopula}\)</span> (Log Likelihood)
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+<span class="math inline">\(\texttt{DDCopula}\)</span> (Log Likelihood)
+</th>
+</tr>
+<tr>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+Gaussian
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+83.01s
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none; color:green;">
+9.89
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+12647.19
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+12659.16
+</td>
+</tr>
+<tr>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+Clayton
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+NA
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;color:green;">
+37.59
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+NA
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+13156.98
+</td>
+</tr>
+<tr>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+Gumbel
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+139.11
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;color:green;">
+98.59
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+11592.72
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+11576.84
+</td>
+</tr>
+<tr>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+Reflected Gumbel
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+131.85
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;color:green;">
+96.52
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+14346.27
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+14372.69
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul style="font-size: 12px; color: #2F6050; line-height: 2.5; margin-top: 4em; margin-left: 3em">
+<li>
+For the dynamic one-factor copula models, our package performs:
+<ul>
+<li>
+Gaussian: 34 - 55 times faster
+</li>
+<li>
+Gumbel: 15 - 20 times faster
+</li>
+<li>
+Reflected Gumbel: 15 - 21 times faster
+</li>
+</ul>
+</li>
+</ul>
+</div><div class="column" style="width:60%;">
+<span style="color: #2F6050; font-size: 12px; margin-top: 0em; display: block;"> Runtime Comparison - Dynamic Dependence Model </span>
+<div style="font-size: 10px; color: black; line-height: 1.0; margin-top: 1em; text-align: left; margin-left: 0em;">
+<table style="margin: 0 auto; border-collapse: collapse;">
+<tbody><tr>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+Period = 90 days
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+Period = 180 days
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+Period = 360 days
+</th>
+<th style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+Period = 720 days
+</th>
+</tr>
+<tr>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+<span class="math inline">\(\texttt{DDCopula}\)</span> (Gaussian)
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none; color: green;">
+2.34 mins
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none; color: green;">
+4.80 mins
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none; color: green;">
+9.12 mins
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none; color: green;">
+14.82 mins
+</td>
+</tr>
+<tr>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+<span class="math inline">\(\texttt{FactorCopula}\)</span> (Gausssian)
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+2.15 hours
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+3.88 hours
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+7.31 hours
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+8.55 hours
+</td>
+</tr>
+<tr>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+<span class="math inline">\(\texttt{DDCopula}\)</span> (Clayton)
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none; color: green;">
+13.44 mins
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none; color: green;">
+28.5 mins
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none; color: green;">
+23.58 mins
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none; color: green;">
+14.94 mins
+</td>
+</tr>
+<tr>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+<span class="math inline">\(\texttt{FactorCopula}\)</span> (Clayton)
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+NA
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+NA
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+NA
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+NA
+</td>
+</tr>
+<tr>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+<span class="math inline">\(\texttt{DDCopula}\)</span> (Gumbel)
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;color: green;">
+16.68 mins
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;color: green;">
+25.92 mins
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;color: green;">
+41.4 mins
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;color: green;">
+55.98 mins
+</td>
+</tr>
+<tr>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+<span class="math inline">\(\texttt{FactorCopula}\)</span> (Gumbel)
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+4.25 hours
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+8.58 hours
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+13.55 hours
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+18.41 hours
+</td>
+</tr>
+<tr>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+<span class="math inline">\(\texttt{DDCopula}\)</span> (Reflected Gumbel)
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none; color: green;">
+14.64 mins
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none; color: green;">
+24.48 mins
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none; color: green;">
+40.20 mins
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none; color: green;">
+58.20 mins
+</td>
+</tr>
+<tr>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+<span class="math inline">\(\texttt{FactorCopula}\)</span>
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+3.16 hours
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+6.19 hours
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+14.00 hours
+</td>
+<td style="padding: 8px; border-top: 1px solid black; border-bottom: 1px solid black; border-left: none; border-right: none;">
+14.52 hours
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="topic-5-conlusion-qa" class="title-slide slide level1 center" data-background-color="#6DA616">
+<h1><span style="color: white;"> Topic 5: Conlusion &amp; Q&amp;A </span></h1>
+
+</section>
+<section id="conlusions" class="slide level2" data-background-color="#6DA616">
+<h2><span style="color: white;"> Conlusions </span></h2>
+<div style="display: block; justify-content: center; align-items: center; text-align: left; font-size: 18px; color: white; background: none; margin-top: 5em; line-height: 1.5">
+<strong>Contribution:</strong> <br>
+<ul>
+<li>
+Extended the factor copula model by incorporating a non-parametric, dynamic dependence structure
+</li>
+<li>
+Developed a dynamic copula switching model to capture time-varying dependencies
+</li>
+<li>
+Designed a one-factor copula model with group structure capabilities
+</li>
+<li>
+Created the R package <code>DDCopula</code> for efficient and user-friendly implementation of these models
+</li>
+</ul>
+<br> <br> <strong>Future Directions:</strong> <br>
+<ul>
+<li>
+Incorporating dynamic group structures
+</li>
+<li>
+Enhancing the <code>DDCopula</code> R package
+</li>
+<li>
+Exploring models with additional latent factors
+</li>
+<li>
+Implementing regime-switching mechanisms
+</li>
+<li>
+Developing more complex group structures
+</li>
+<li>
+Investigating alternative methods for modeling dynamic copula parameters
+</li>
+</ul>
+</div>
+</section>
+<section id="qa" class="slide level2" data-background-color="#6DA616">
+<h2><span style="color: white;"> Q&amp;A </span></h2>
+
+<div class="quarto-auto-generated-content">
+<div class="footer footer-default">
+
+</div>
+</div>
+</section></section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="thesis_presentation_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="thesis_presentation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="thesis_presentation_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="thesis_presentation_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="thesis_presentation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="thesis_presentation_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="thesis_presentation_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="thesis_presentation_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="thesis_presentation_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="thesis_presentation_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'convex',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>
